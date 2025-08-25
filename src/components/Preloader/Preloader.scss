@@ -1,0 +1,5 @@
+@use "../../scss/globals/colors" as c;
+
+.cover {
+  background-color: c.$clr-black;
+}
