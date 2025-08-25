@@ -1,5 +1,90 @@
-@use "@/scss/util/functions" as f;
+@use "../../scss/util/functions" as f;
+@use "../../scss/globals/colors" as c;
 
-div {
-  background-color: blue;
+.login {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+  height: 100vh;
+  gap: 1.5rem;
+
+  &__header {
+    font-size: f.rem(70);
+    color: c.$clr-white;
+  }
+
+  &__profile {
+    display: flex;
+    gap: 2.5rem;
+    color: rgba(c.$clr-white, 30%);
+    font-size: f.rem(20);
+
+    img {
+      border-radius: 0.3rem;
+      width: f.rem(180);
+      height: f.rem(180);
+    }
+  }
+}
+
+.profile {
+  text-align: center;
+
+  &--add {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.round-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.3rem;
+
+  width: f.rem(180); /* Same as image width */
+  height: f.rem(180); /* Same as image height */
+
+  &:hover {
+    background: c.$clr-white;
+    cursor: pointer;
+  }
+
+  span::after {
+    background-color: rgba(c.$clr-white, 35%);
+    color: c.$clr-black;
+    display: inline-block;
+
+    font-size: f.rem(80);
+    font-weight: bolder;
+    border-radius: 50%;
+    width: 6rem;
+    content: "+";
+  }
+}
+
+img:hover {
+  outline: 3px solid white;
+  cursor: pointer;
+}
+
+.button-profiles {
+  font-size: f.rem(16);
+  width: f.rem(300);
+  border: 1px solid c.$clr-midgray;
+  padding: 0.5rem;
+
+  background-color: c.$clr-black;
+  color: c.$clr-gray;
+  letter-spacing: 0.2rem;
+
+  &:hover {
+    border: 1px solid c.$clr-white;
+    color: c.$clr-white;
+    cursor: pointer;
+  }
 }
