@@ -8,7 +8,9 @@
   align-content: center;
   text-align: center;
   height: 100vh;
-  gap: 1.5rem;
+  gap: 3rem;
+
+  animation: onload 0.3s 0.2s ease-in;
 
   &__header {
     font-size: f.rem(70);
@@ -17,9 +19,13 @@
 
   &__profile {
     display: flex;
-    gap: 2.5rem;
+    gap: 3.5rem;
     color: rgba(c.$clr-white, 30%);
     font-size: f.rem(20);
+
+    .profile:hover {
+      color: c.$clr-white;
+    }
 
     img {
       border-radius: 0.3rem;
@@ -38,6 +44,17 @@
     justify-content: center;
     align-items: center;
   }
+
+  @keyframes onload {
+    0% {
+      opacity: 0;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
 
 .round-container {
@@ -46,12 +63,17 @@
   align-items: center;
   border-radius: 0.3rem;
 
-  width: f.rem(180); /* Same as image width */
-  height: f.rem(180); /* Same as image height */
+  width: f.rem(180);
+  height: f.rem(180);
 
   &:hover {
     background: c.$clr-white;
     cursor: pointer;
+
+    span::after {
+      background-color: c.$clr-midgray;
+      color: c.$clr-white;
+    }
   }
 
   span::after {

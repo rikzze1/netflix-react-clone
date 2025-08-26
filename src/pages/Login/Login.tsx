@@ -1,22 +1,44 @@
-import profile from "@/assets/profile/user.png";
-import kidsProfile from "@/assets/profile/kids_profile.png";
+import userProfile from "@/assets/profile/user.png";
+import userProfile2 from "@/assets/profile/user2.png";
+import userProfile3 from "@/assets/profile/user3.png";
 
 import "./Login.scss";
 
+interface Profile {
+    path: string;
+    label: string;
+}
+
 const Login = () => {
+
+    const profiles: Profile[] = [
+        {
+            path: userProfile,
+            label: "You"
+        },
+        {
+            path: userProfile2,
+            label: "Not you"
+        },
+        {
+            path: userProfile3,
+            label: "Someone"
+        },
+    ]
+
     return (
         <div className="login">
             <h1 className="login__header">Who's whatching?</h1>
             <div className="login__profile">
+                {profiles.map((item, index) => {
+                    return (
+                        <div className="profile" key={index} >
+                            <img src={item.path} alt={item.label} />
+                            <p>{item.label}</p>
+                        </div>
+                    )
+                })}
                 <div className="profile">
-                    <img src={profile} alt="your profile" />
-                    <p>You</p>
-                </div>
-                <div className="profile--kids">
-                    <img src={kidsProfile} alt="kids profile" />
-                    <p>Kids</p>
-                </div>
-                <div className="profile--add">
                     <div className="round-container">
                         <span></span>
                     </div>
