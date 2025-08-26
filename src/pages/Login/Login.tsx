@@ -28,12 +28,12 @@ const Login = () => {
 
     return (
         <div className="login">
-            <h1 className="login__header">Who's whatching?</h1>
+            <h1 className="login__header">Who's watching?</h1>
             <div className="login__profile">
                 {profiles.map((item, index) => {
                     return (
                         <div className="profile" key={index} >
-                            <img src={item.path} alt={item.label} />
+                            <img loading="lazy" src={item.path} alt={item.label} />
                             <p>{item.label}</p>
                         </div>
                     )
