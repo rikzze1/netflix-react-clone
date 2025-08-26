@@ -1,0 +1,113 @@
+@use '../../scss/globals' as g;
+@use '../../scss/util' as u;
+
+.billboard {
+	background: url('../../assets/Billboard/billboard.webp') center/cover
+		no-repeat;
+	height: 100vh;
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		height: 80%;
+	}
+
+	&__title {
+		width: u.rem(700);
+
+		&:hover {
+			outline: none;
+		}
+	}
+
+	&__description {
+		color: g.$clr-white;
+		font-size: u.rem(23);
+		font-weight: 500;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+		max-width: 50ch;
+	}
+
+	&__buttons {
+		display: flex;
+		justify-content: space-between;
+
+		.left-items {
+			display: flex;
+			gap: 0.8rem;
+
+			button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 0.3rem;
+				border: 1px solid g.$clr-black;
+				gap: 0.5rem;
+				padding: 0.5rem;
+
+				font-weight: 600;
+				font-size: u.rem(16);
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+
+		.right-items {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 0.9rem;
+		}
+	}
+}
+
+.left-items > button:nth-child(1) {
+	width: 6rem;
+	background-color: g.$clr-white;
+}
+
+.left-items > button:nth-child(2) {
+	width: 9rem;
+	background-color: rgba(g.$clr-white-30-opacity, 55%);
+	border-radius: 0.3rem;
+	color: g.$clr-white;
+	border: none;
+
+	&:hover {
+		background-color: rgba(g.$clr-white-30-opacity, 35%);
+	}
+}
+
+.right-items > button {
+	padding: 0.6rem;
+	border-radius: 100%;
+	background-color: transparent;
+	font-weight: bolder;
+	border: 1px solid g.$clr-white;
+
+	&:hover {
+		cursor: pointer;
+		background-color: rgba(g.$clr-white, 20%);
+	}
+}
+
+.rating {
+	display: flex;
+	align-items: center;
+	border-left: 2px solid g.$clr-white;
+	width: u.rem(120);
+	height: 100%;
+	padding: 0.2rem;
+
+	background-color: rgba(g.$clr-black, 70%);
+	color: g.$clr-white;
+	font-size: u.rem(20);
+	font-weight: bold;
+
+	span {
+		margin-left: 10px;
+	}
+}

@@ -1,0 +1,7 @@
+@use '../../scss/globals' as g;
+@use '../../scss/util' as u;
+
+.banner {
+	display: grid;
+	grid-template-columns: u.rem(100) 70%vh auto;
+}

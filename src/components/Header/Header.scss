@@ -7,6 +7,12 @@
 	margin-inline: 1rem;
 	padding-top: 0.5rem;
 
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+
 	&__logo {
 		background: none;
 		border: none;
@@ -74,7 +80,7 @@
 			}
 
 			button {
-				background-color: g.$clr-black;
+				background-color: transparent;
 				border: none;
 
 				&:hover {
