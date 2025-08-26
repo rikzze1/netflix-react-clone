@@ -14,6 +14,7 @@ import { TransferProfileIcon } from '@/components/Icons/TransferProfileIcon';
 import { AccountIcon } from '@/components/Icons/AccountIcon';
 
 import './Header.scss';
+import { HelpCenterIcon } from '../Icons/HelpCenterIcon';
 
 interface Menu {
 	label: string;
@@ -27,8 +28,10 @@ interface Settings {
 
 export const Header = () => {
 	const navigate = useNavigate();
-	const [isSearchClick, setIsSearchClick] = useState(false);
 	const searchRef = useRef<HTMLDivElement>(null);
+
+	const [isSearchClick, setIsSearchClick] = useState(false);
+	const [isProfileClick, setIsProfileClick] = useState(false);
 
 	const menu: Menu[] = [
 		{
@@ -82,18 +85,28 @@ export const Header = () => {
 			label: 'Manage Profiles',
 		},
 		{
-			icon: <TransferProfileIcon color="white" height="20" width="20" />,
+			icon: (
+				<TransferProfileIcon
+					color="whitesmoke"
+					height="20"
+					width="20"
+				/>
+			),
 			label: 'Transfer Profile',
 		},
 		{
 			icon: <AccountIcon color="white" height="20" width="20" />,
 			label: 'Account',
 		},
+		{
+			icon: <HelpCenterIcon color="white" height="20" width="20" />,
+			label: 'Help Center',
+		},
 	];
 
 	const returnToLogin = () => navigate('/browse');
-
 	const searchToggle = () => setIsSearchClick(!isSearchClick);
+	const profileSettingsToggle = () => setIsProfileClick(!isProfileClick);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -102,17 +115,18 @@ export const Header = () => {
 				!searchRef.current.contains(event.target as Node)
 			) {
 				setIsSearchClick(false);
+				setIsProfileClick(false);
 			}
 		};
 
-		if (isSearchClick) {
+		if (isSearchClick || isProfileClick) {
 			document.addEventListener('mousedown', handleClickOutside);
 		}
 
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
-	}, [isSearchClick]);
+	}, [isSearchClick, isProfileClick]);
 
 	return (
 		<nav className="header">
@@ -157,35 +171,49 @@ export const Header = () => {
 					<NotificationIcon color="#fefefe" height="20" width="20" />
 				</div>
 				<div className="item">
-					<img
-						src={userProfile}
-						alt="user"
-						style={{ borderRadius: '4px' }}
-					/>
+					<button onClick={profileSettingsToggle}>
+						<img
+							src={userProfile}
+							alt="user"
+							style={{ borderRadius: '4px' }}
+						/>
+					</button>
 					<span
 						className="caret-down"
 						style={{ color: 'white' }}
 					></span>
-					<div className="item__settings" data-settings="hidden">
-						<div className="profiles">
-							{profiles.map((item, index) => (
-								<div key={index} className="profiles__item">
-									<img src={item.route} alt={item.label} />
-									<span>
-										<a href="/browse">{item.label}</a>
-									</span>
+					{isProfileClick && (
+						<div className="item__settings">
+							<div className="profiles">
+								{profiles.map((item, index) => (
+									<div key={index} className="profiles__item">
+										<img
+											src={item.route}
+											alt={item.label}
+										/>
+										<span>
+											<a href="/browse">{item.label}</a>
+										</span>
+									</div>
+								))}
+								{settings.map((item, index) => (
+									<div
+										key={index}
+										className="profile__settings"
+									>
+										{item.icon}
+										<span>
+											<a href="/browse">{item.label}</a>
+										</span>
+									</div>
+								))}
+								<div className="separator"></div>
+								<div className="signout">
+									<a href="/browse">Sign out of Netflix</a>
 								</div>
-							))}
-							{settings.map((item, index) => (
-								<div key={index} className="profile__settings">
-									{item.icon}
-									<span>
-										<a href="/browse">{item.label}</a>
-									</span>
-								</div>
-							))}
+							</div>
 						</div>
-					</div>
+					)}
 				</div>
 			</div>
 		</nav>
