@@ -1,33 +1,40 @@
-import { Suspense, lazy } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { Suspense, lazy } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 
-import { SuspenseFallback } from "@/components/SuspenseFallback/SuspenseFallback";
+const Login = lazy(() => import('@/pages/Login/Login'));
+const Home = lazy(() => import('@/pages/Home/Home'));
 
-const Login = lazy(() => import("@/pages/Login/Login"));
+import { SuspenseFallback } from '@/components/SuspenseFallback/SuspenseFallback';
 
-import { Preloader } from "@/components/Preloader/Preloader";
+import { Preloader } from '@/components/Preloader/Preloader';
 
 const routes = createBrowserRouter([
-    {
-        path: "/",
-        element: (
-            <Suspense fallback={<SuspenseFallback />}>
-                <Preloader />
-            </Suspense>
-        )
-    },
-    {
-        path: "/browse",
-        element: (
-            <Suspense fallback={<SuspenseFallback />}>
-                <Login />
-            </Suspense>
-        )
-    },
-])
+	{
+		path: '/',
+		element: (
+			<Suspense fallback={<SuspenseFallback />}>
+				<Preloader />
+			</Suspense>
+		),
+	},
+	{
+		path: '/browse',
+		element: (
+			<Suspense fallback={<SuspenseFallback />}>
+				<Login />
+			</Suspense>
+		),
+	},
+	{
+		path: '/home',
+		element: (
+			<Suspense fallback={<SuspenseFallback />}>
+				<Home />
+			</Suspense>
+		),
+	},
+]);
 
 export const Router = () => {
-    return (
-        <RouterProvider router={routes} />
-    )
-}
+	return <RouterProvider router={routes} />;
+};

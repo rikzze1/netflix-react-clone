@@ -1,0 +1,172 @@
+@use '../../scss/globals' as g;
+@use '../../scss/util' as u;
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin-inline: 1rem;
+	padding-top: 0.5rem;
+
+	&__logo {
+		background: none;
+		border: none;
+		outline: none;
+		cursor: pointer;
+
+		&:focus,
+		&:focus-visible,
+		&:active,
+		&:hover {
+			outline: none !important;
+			border: none !important;
+			box-shadow: none !important;
+		}
+
+		img {
+			outline: none;
+			width: u.rem(85);
+		}
+	}
+
+	&__left-menu {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	&__nav-list {
+		display: flex;
+		gap: 1rem;
+
+		color: rgba(g.$clr-white, 80%);
+		font-size: u.rem(11);
+		list-style-type: none;
+		font-weight: lighter;
+
+		li:nth-child(1) {
+			color: g.$clr-white;
+			font-weight: bolder;
+		}
+	}
+
+	&__right-menu {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+
+		a {
+			color: g.$clr-white;
+			font-size: u.rem(11);
+			text-decoration: none;
+		}
+
+		.item {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			gap: 0.4rem;
+
+			img {
+				width: 2rem;
+				height: auto;
+				border-radius: 0.3rem;
+			}
+
+			button {
+				background-color: g.$clr-black;
+				border: none;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+
+			#search-input {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				outline: 1px solid g.$clr-white;
+				padding: 0.3rem;
+				overflow: hidden;
+
+				animation: expandWidth 0.3s ease-out forwards;
+
+				input {
+					background-color: transparent;
+					color: g.$clr-smokewhite;
+					padding: 0.3rem;
+					border: none;
+					width: 200px;
+					min-width: 0;
+
+					&:focus {
+						outline: none;
+					}
+				}
+			}
+
+			&__settings {
+				position: absolute;
+				width: u.rem(220);
+				top: 3rem;
+				right: 1rem;
+				padding: 1rem;
+
+				outline: 1px solid #2b2b2b;
+				color: g.$clr-white;
+
+				.profiles {
+					display: flex;
+					flex-direction: column;
+
+					a {
+						font-size: 0.8rem;
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+
+					&__item {
+						display: flex;
+						align-items: center;
+						margin-bottom: 1rem;
+						gap: 1rem;
+					}
+
+					.profile__settings {
+						display: flex;
+						align-items: center;
+						gap: 0.5rem;
+						margin-top: 0.5rem;
+					}
+				}
+			}
+
+			@keyframes expandWidth {
+				from {
+					width: 30px;
+				}
+				to {
+					width: 250px;
+				}
+			}
+
+			.caret-down {
+				&::after {
+					content: '▾';
+					transition: transform 0.3s ease;
+					display: inline-block;
+				}
+
+				&:hover::after {
+					transform: rotate(180deg);
+				}
+			}
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+}

@@ -1,14 +1,14 @@
-@use "fonts";
-@use "colors" as c;
+@use 'fonts';
+@use 'colors' as c;
 
 *::before,
 *::after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: c.$clr-black;
-  font-family: "Netflix Sans", Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: c.$clr-black;
+	font-family: 'Netflix Sans', Arial, Helvetica, sans-serif;
 }

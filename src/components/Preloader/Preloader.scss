@@ -1,54 +1,54 @@
-@use "../../scss/globals/colors" as c;
-@use "../../scss/util/functions" as f;
+@use '../../scss/globals/colors' as c;
+@use '../../scss/util/functions' as f;
 
 .cover {
-  background-color: c.$clr-black;
-  height: 100vh;
+	background-color: c.$clr-black;
+	height: 100vh;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
-  animation: slide-up 0.5s 0.2s ease-in both;
+	animation: slide-up 0.5s 0.2s ease-in both;
 
-  &__header {
-    color: c.$clr-red;
-    font-size: f.rem(30);
-    animation: slide-up 0.7s 0.5s ease-in-out both;
+	&__header {
+		color: c.$clr-red;
+		font-size: f.rem(30);
+		animation: slide-up 0.7s 0.5s ease-in-out both;
 
-    @media (min-width: f.rem(768)) {
-      font-size: f.rem(50);
-    }
+		@media (min-width: f.rem(768)) {
+			font-size: f.rem(50);
+		}
 
-    @media (min-width: f.rem(1048)) {
-      font-size: f.rem(100);
-    }
-  }
+		@media (min-width: f.rem(1048)) {
+			font-size: f.rem(100);
+		}
+	}
 
-  #cover__image {
-    width: f.rem(250);
-    height: f.rem(125);
+	#cover__image {
+		width: f.rem(250);
+		height: f.rem(125);
 
-    @media (min-width: f.rem(768)) {
-      width: f.rem(400);
-      height: f.rem(200);
-    }
+		@media (min-width: f.rem(768)) {
+			width: f.rem(400);
+			height: f.rem(200);
+		}
 
-    @media (min-width: f.rem(1048)) {
-      width: f.rem(850);
-      height: f.rem(350);
-    }
-  }
+		@media (min-width: f.rem(1048)) {
+			width: f.rem(850);
+			height: f.rem(350);
+		}
+	}
 
-  @keyframes slide-up {
-    0% {
-      opacity: 0;
-      transform: translateY(50px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+	@keyframes slide-up {
+		0% {
+			opacity: 0;
+			transform: translateY(50px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
 }

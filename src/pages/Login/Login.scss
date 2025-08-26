@@ -1,158 +1,174 @@
-@use "../../scss/util" as u;
-@use "../../scss/globals" as g;
+@use '../../scss/util' as u;
+@use '../../scss/globals' as g;
 
 .login {
-  display: grid;
-  grid-template-columns: 1fr;
-  place-items: center;
-  align-content: center;
-  text-align: center;
-  min-height: 100vh;
-  gap: 3rem;
+	display: grid;
+	grid-template-columns: 1fr;
+	place-items: center;
+	align-content: center;
+	text-align: center;
+	min-height: 100vh;
+	gap: 3rem;
 
-  animation: onload 0.3s 0.2s ease-in;
+	animation: onload 0.3s 0.2s ease-in;
 
-  @include u.breakpoint-down(small) {
-    gap: 1.5rem;
-    padding: 1rem;
-  }
+	@include u.breakpoint-down(small) {
+		gap: 1.5rem;
+		padding: 1rem;
+	}
 
-  &__header {
-    font-size: u.rem(70);
-    color: g.$clr-white;
+	&__header {
+		font-size: u.rem(70);
+		color: g.$clr-white;
 
-    @include u.breakpoint-down(medium) {
-      font-size: u.rem(32);
-    }
+		@include u.breakpoint-down(medium) {
+			font-size: u.rem(32);
+		}
 
-    @include u.breakpoint-down(small) {
-      font-size: u.rem(24);
-    }
-  }
+		@include u.breakpoint-down(small) {
+			font-size: u.rem(24);
+		}
+	}
 
-  &__profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 3.5rem;
-    color: rgba(g.$clr-white, 30%);
-    font-size: u.rem(20);
+	&__profile {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 3.5rem;
+		color: rgba(g.$clr-white, 30%);
+		font-size: u.rem(20);
 
-    @include u.breakpoint-down(medium) {
-      font-size: u.rem(16);
-    }
+		@include u.breakpoint-down(medium) {
+			font-size: u.rem(16);
+		}
 
-    @include u.breakpoint-down(small) {
-      flex-direction: column;
-      gap: 0;
-      font-size: u.rem(14);
-    }
+		@include u.breakpoint-down(small) {
+			flex-direction: column;
+			gap: 0;
+			font-size: u.rem(14);
+		}
 
-    .profile:hover {
-      color: g.$clr-white;
-    }
+		.profile:hover {
+			color: g.$clr-white;
+		}
 
-    img {
-      border-radius: 0.3rem;
-      width: u.rem(180);
-      height: u.rem(180);
+		img {
+			border-radius: 0.3rem;
+			width: u.rem(180);
+			height: u.rem(180);
 
-      @include u.breakpoint-down(medium) {
-        width: u.rem(90);
-        height: u.rem(90);
-      }
-    }
-  }
+			@include u.breakpoint-down(medium) {
+				width: u.rem(90);
+				height: u.rem(90);
+			}
+		}
+	}
 }
 
 .profile {
-  text-align: center;
+	text-align: center;
+	color: g.$clr-gray;
+	background-color: g.$clr-black;
+	border: none;
+	font-size: u.rem(20);
 
-  &--add {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+	@include u.breakpoint-down(medium) {
+		font-size: u.rem(16);
+	}
 
-  @keyframes onload {
-    0% {
-      opacity: 0;
-      transform: scale(1.2);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
+	@include u.breakpoint-down(small) {
+		font-size: u.rem(14);
+	}
+
+	&--add {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		&:hover {
+			color: g.$clr-white;
+		}
+	}
+
+	@keyframes onload {
+		0% {
+			opacity: 0;
+			transform: scale(1.2);
+		}
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
 }
 
 .round-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 0.3rem;
 
-  width: u.rem(180);
-  height: u.rem(180);
+	width: u.rem(180);
+	height: u.rem(180);
 
-  &:hover {
-    background: g.$clr-white;
-    cursor: pointer;
+	&:hover {
+		background: g.$clr-white;
+		cursor: pointer;
 
-    span::after {
-      background-color: g.$clr-midgray;
-      color: g.$clr-white;
-    }
-  }
+		span::after {
+			background-color: g.$clr-midgray;
+			color: g.$clr-white;
+		}
+	}
 
-  span::after {
-    background-color: rgba(g.$clr-white, 35%);
-    color: g.$clr-black;
-    display: inline-block;
+	span::after {
+		background-color: rgba(g.$clr-white, 35%);
+		color: g.$clr-black;
+		display: inline-block;
 
-    font-size: u.rem(80);
-    font-weight: bolder;
-    border-radius: 50%;
-    width: 6rem;
-    content: "+";
-  }
+		font-size: u.rem(80);
+		font-weight: bolder;
+		border-radius: 50%;
+		width: 6rem;
+		content: '+';
+	}
 
-  @include u.breakpoint-down(medium) {
-    width: u.rem(120);
-    height: u.rem(120);
+	@include u.breakpoint-down(medium) {
+		width: u.rem(120);
+		height: u.rem(120);
 
-    span::after {
-      font-size: u.rem(50);
-      width: 4rem;
-    }
-  }
+		span::after {
+			font-size: u.rem(50);
+			width: 4rem;
+		}
+	}
 }
 
 img:hover {
-  outline: 3px solid white;
-  cursor: pointer;
+	outline: 3px solid white;
+	cursor: pointer;
 }
 
 .button-profiles {
-  font-size: u.rem(16);
-  width: u.rem(300);
-  border: 1px solid g.$clr-midgray;
-  padding: 0.5rem;
+	font-size: u.rem(16);
+	width: u.rem(300);
+	border: 1px solid g.$clr-midgray;
+	padding: 0.5rem;
 
-  background-color: g.$clr-black;
-  color: g.$clr-gray;
-  letter-spacing: 0.2rem;
+	background-color: g.$clr-black;
+	color: g.$clr-gray;
+	letter-spacing: 0.2rem;
 
-  @include u.breakpoint-down(medium) {
-    width: u.rem(200);
-    font-size: u.rem(14);
-  }
+	@include u.breakpoint-down(medium) {
+		width: u.rem(200);
+		font-size: u.rem(14);
+	}
 
-  &:hover {
-    border: 1px solid g.$clr-white;
-    color: g.$clr-white;
-    cursor: pointer;
-  }
+	&:hover {
+		border: 1px solid g.$clr-white;
+		color: g.$clr-white;
+		cursor: pointer;
+	}
 }
