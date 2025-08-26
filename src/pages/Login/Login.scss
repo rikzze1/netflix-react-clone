@@ -1,5 +1,5 @@
-@use "../../scss/util/functions" as f;
-@use "../../scss/globals/colors" as c;
+@use "../../scss/util" as u;
+@use "../../scss/globals" as g;
 
 .login {
   display: grid;
@@ -7,30 +7,61 @@
   place-items: center;
   align-content: center;
   text-align: center;
-  height: 100vh;
+  min-height: 100vh;
   gap: 3rem;
 
   animation: onload 0.3s 0.2s ease-in;
 
+  @include u.breakpoint-down(small) {
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
   &__header {
-    font-size: f.rem(70);
-    color: c.$clr-white;
+    font-size: u.rem(70);
+    color: g.$clr-white;
+
+    @include u.breakpoint-down(medium) {
+      font-size: u.rem(32);
+    }
+
+    @include u.breakpoint-down(small) {
+      font-size: u.rem(24);
+    }
   }
 
   &__profile {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 3.5rem;
-    color: rgba(c.$clr-white, 30%);
-    font-size: f.rem(20);
+    color: rgba(g.$clr-white, 30%);
+    font-size: u.rem(20);
+
+    @include u.breakpoint-down(medium) {
+      font-size: u.rem(16);
+    }
+
+    @include u.breakpoint-down(small) {
+      flex-direction: column;
+      gap: 0;
+      font-size: u.rem(14);
+    }
 
     .profile:hover {
-      color: c.$clr-white;
+      color: g.$clr-white;
     }
 
     img {
       border-radius: 0.3rem;
-      width: f.rem(180);
-      height: f.rem(180);
+      width: u.rem(180);
+      height: u.rem(180);
+
+      @include u.breakpoint-down(medium) {
+        width: u.rem(90);
+        height: u.rem(90);
+      }
     }
   }
 }
@@ -63,29 +94,39 @@
   align-items: center;
   border-radius: 0.3rem;
 
-  width: f.rem(180);
-  height: f.rem(180);
+  width: u.rem(180);
+  height: u.rem(180);
 
   &:hover {
-    background: c.$clr-white;
+    background: g.$clr-white;
     cursor: pointer;
 
     span::after {
-      background-color: c.$clr-midgray;
-      color: c.$clr-white;
+      background-color: g.$clr-midgray;
+      color: g.$clr-white;
     }
   }
 
   span::after {
-    background-color: rgba(c.$clr-white, 35%);
-    color: c.$clr-black;
+    background-color: rgba(g.$clr-white, 35%);
+    color: g.$clr-black;
     display: inline-block;
 
-    font-size: f.rem(80);
+    font-size: u.rem(80);
     font-weight: bolder;
     border-radius: 50%;
     width: 6rem;
     content: "+";
+  }
+
+  @include u.breakpoint-down(medium) {
+    width: u.rem(120);
+    height: u.rem(120);
+
+    span::after {
+      font-size: u.rem(50);
+      width: 4rem;
+    }
   }
 }
 
@@ -95,18 +136,23 @@ img:hover {
 }
 
 .button-profiles {
-  font-size: f.rem(16);
-  width: f.rem(300);
-  border: 1px solid c.$clr-midgray;
+  font-size: u.rem(16);
+  width: u.rem(300);
+  border: 1px solid g.$clr-midgray;
   padding: 0.5rem;
 
-  background-color: c.$clr-black;
-  color: c.$clr-gray;
+  background-color: g.$clr-black;
+  color: g.$clr-gray;
   letter-spacing: 0.2rem;
 
+  @include u.breakpoint-down(medium) {
+    width: u.rem(200);
+    font-size: u.rem(14);
+  }
+
   &:hover {
-    border: 1px solid c.$clr-white;
-    color: c.$clr-white;
+    border: 1px solid g.$clr-white;
+    color: g.$clr-white;
     cursor: pointer;
   }
 }
