@@ -5,6 +5,29 @@
 	background: url('../../assets/Billboard/billboard.webp') center/cover
 		no-repeat;
 	height: 100vh;
+	position: relative;
+
+	video {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0;
+		animation: fadeInVideo 1s ease-in-out 0.5s forwards;
+	}
+
+	@keyframes fadeInVideo {
+		from {
+			opacity: 0;
+			transform: scale(1.05);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
 
 	&__info {
 		display: flex;
@@ -15,23 +38,37 @@
 
 	&__title {
 		width: u.rem(700);
+		z-index: 50;
 
 		&:hover {
 			outline: none;
 		}
+
+		&[data-state='small'] {
+			transition: 0.8s 0.4s ease-out;
+			transform: scale(0.7);
+		}
 	}
 
 	&__description {
+		z-index: 50;
 		color: g.$clr-white;
 		font-size: u.rem(23);
 		font-weight: 500;
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
 		max-width: 50ch;
+		transition: opacity 0.8s 0.4s ease-out, visibility 0.8s 0.4s ease-out;
+
+		&[data-state='small'] {
+			opacity: 0;
+			visibility: hidden;
+		}
 	}
 
 	&__buttons {
 		display: flex;
 		justify-content: space-between;
+		z-index: 50;
 
 		.left-items {
 			display: flex;
