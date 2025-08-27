@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
 
 import netflixLogo from '@/assets/logo/Netflix_Logo_RGB.png';
@@ -6,6 +6,8 @@ import userProfile from '@/assets/profile/user.png';
 import userProfile2 from '@/assets/profile/user2.png';
 import userProfile3 from '@/assets/profile/user3.png';
 import userProfileKids from '@/assets/profile/kids_profile.png';
+
+import { useEventMouseLeave } from '@/hooks/useEventMouseLeave';
 
 import { SearchIcon } from '@/components/Icons/SearchIcon';
 import { NotificationIcon } from '@/components/Icons/NotificationIcon';
@@ -28,6 +30,7 @@ interface Settings {
 
 export const Header = () => {
 	const navigate = useNavigate();
+	const profileRef = useRef<HTMLDivElement>(null);
 	const searchRef = useRef<HTMLDivElement>(null);
 
 	const [isSearchClick, setIsSearchClick] = useState(false);
@@ -108,25 +111,21 @@ export const Header = () => {
 	const searchToggle = () => setIsSearchClick(!isSearchClick);
 	const profileSettingsToggle = () => setIsProfileClick(!isProfileClick);
 
-	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (
-				searchRef.current &&
-				!searchRef.current.contains(event.target as Node)
-			) {
-				setIsSearchClick(false);
-				setIsProfileClick(false);
-			}
-		};
+	const handleProfileMouseEnter = () => {
+		setIsProfileClick(true);
+	};
 
-		if (isSearchClick || isProfileClick) {
-			document.addEventListener('mousedown', handleClickOutside);
-		}
+	const handleProfileMouseLeave = () => {
+		setIsProfileClick(false);
+		setIsSearchClick(false);
+	};
 
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, [isSearchClick, isProfileClick]);
+	useEventMouseLeave({
+		element: profileRef,
+		relatedTarget: '.item__settings',
+		onMouseEnter: handleProfileMouseEnter,
+		onMouseLeave: handleProfileMouseLeave,
+	});
 
 	return (
 		<nav className="header">
@@ -141,13 +140,13 @@ export const Header = () => {
 				</ul>
 			</div>
 			<div className="header__right-menu">
-				<div className="item" ref={searchRef}>
+				<div className="item">
 					{isSearchClick ? (
-						<div id="search-input">
+						<div id="search-input" ref={searchRef}>
 							<SearchIcon
 								color="#fefefe"
-								height="18"
-								width="18"
+								height="22"
+								width="22"
 							/>
 							<input
 								type="text"
@@ -158,8 +157,8 @@ export const Header = () => {
 						<button onClick={searchToggle}>
 							<SearchIcon
 								color="#fefefe"
-								height="18"
-								width="18"
+								height="22"
+								width="22"
 							/>
 						</button>
 					)}
@@ -168,9 +167,9 @@ export const Header = () => {
 					Kids
 				</a>
 				<div className="item">
-					<NotificationIcon color="#fefefe" height="20" width="20" />
+					<NotificationIcon color="#fefefe" height="22" width="22" />
 				</div>
-				<div className="item">
+				<div className="item" ref={profileRef}>
 					<button onClick={profileSettingsToggle}>
 						<img
 							src={userProfile}

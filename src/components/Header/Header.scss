@@ -4,7 +4,7 @@
 .header {
 	display: flex;
 	justify-content: space-between;
-	margin-inline: 1rem;
+	margin-inline: 2.8rem;
 	padding-top: 0.5rem;
 
 	position: fixed;
@@ -30,7 +30,11 @@
 
 		img {
 			outline: none;
-			width: u.rem(85);
+			width: u.rem(118);
+
+			@include u.breakpoint-down(medium) {
+				width: u.rem(80);
+			}
 		}
 	}
 
@@ -41,16 +45,28 @@
 	}
 	&__nav-list {
 		display: flex;
-		gap: 1rem;
+		gap: 1.2rem;
 
 		color: rgba(g.$clr-white, 80%);
-		font-size: u.rem(11);
+		font-size: u.rem(14);
 		list-style-type: none;
 		font-weight: lighter;
 
 		li:nth-child(1) {
 			color: g.$clr-white;
 			font-weight: bolder;
+		}
+
+		li:hover {
+			cursor: pointer;
+			color: rgba(g.$clr-smokewhite, 50%);
+			transition: 0.3s 0.1s ease-in;
+		}
+
+		li:not(:nth-child(1)) {
+			@include u.breakpoint-down(medium) {
+				display: none;
+			}
 		}
 	}
 
@@ -62,7 +78,7 @@
 
 		a {
 			color: g.$clr-white;
-			font-size: u.rem(11);
+			font-size: u.rem(15);
 			text-decoration: none;
 		}
 
@@ -74,7 +90,7 @@
 			gap: 0.4rem;
 
 			img {
-				width: 2rem;
+				width: 2.3rem;
 				height: auto;
 				border-radius: 0.3rem;
 			}
@@ -114,6 +130,7 @@
 
 			&__settings {
 				position: absolute;
+				background-color: g.$clr-black;
 				width: u.rem(220);
 				top: 3rem;
 				right: 1rem;
@@ -188,7 +205,12 @@
 					content: '▾';
 					transition: transform 0.3s ease;
 					display: inline-block;
+					font-size: u.rem(19);
 				}
+			}
+
+			&:hover .caret-down::after {
+				transform: rotate(180deg);
 			}
 
 			&:hover {
