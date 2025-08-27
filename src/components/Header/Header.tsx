@@ -7,7 +7,8 @@ import userProfile2 from '@/assets/profile/user2.png';
 import userProfile3 from '@/assets/profile/user3.png';
 import userProfileKids from '@/assets/profile/kids_profile.png';
 
-import { useEventMouseLeave } from '@/hooks/useEventMouseLeave';
+import { usePointerEvent } from '@/hooks/usePointerEvent';
+import { useClickEvent } from '@/hooks/useClickEvent';
 
 import { SearchIcon } from '@/components/Icons/SearchIcon';
 import { NotificationIcon } from '@/components/Icons/NotificationIcon';
@@ -108,7 +109,10 @@ export const Header = () => {
 	];
 
 	const returnToLogin = () => navigate('/browse');
-	const searchToggle = () => setIsSearchClick(!isSearchClick);
+	const searchToggle = (e?: React.MouseEvent) => {
+		e?.stopPropagation();
+		setIsSearchClick(!isSearchClick);
+	};
 	const profileSettingsToggle = () => setIsProfileClick(!isProfileClick);
 
 	const handleProfileMouseEnter = () => {
@@ -117,10 +121,18 @@ export const Header = () => {
 
 	const handleProfileMouseLeave = () => {
 		setIsProfileClick(false);
-		setIsSearchClick(false);
 	};
 
-	useEventMouseLeave({
+	const handleSearchClickOutside = () => {
+		if (isSearchClick) setIsSearchClick(false);
+	};
+
+	useClickEvent({
+		element: searchRef,
+		onClickOutside: handleSearchClickOutside,
+	});
+
+	usePointerEvent({
 		element: profileRef,
 		relatedTarget: '.item__settings',
 		onMouseEnter: handleProfileMouseEnter,
@@ -143,11 +155,13 @@ export const Header = () => {
 				<div className="item">
 					{isSearchClick ? (
 						<div id="search-input" ref={searchRef}>
-							<SearchIcon
-								color="#fefefe"
-								height="22"
-								width="22"
-							/>
+							<button onClick={searchToggle}>
+								<SearchIcon
+									color="#fefefe"
+									height="22"
+									width="22"
+								/>
+							</button>
 							<input
 								type="text"
 								placeholder="Titles, people, genres"
@@ -163,7 +177,7 @@ export const Header = () => {
 						</button>
 					)}
 				</div>
-				<a className="item" href="/">
+				<a className="item--kids" href="/">
 					Kids
 				</a>
 				<div className="item">
@@ -183,6 +197,7 @@ export const Header = () => {
 					></span>
 					{isProfileClick && (
 						<div className="item__settings">
+							<span className="profile__caret"></span>
 							<div className="profiles">
 								{profiles.map((item, index) => (
 									<div key={index} className="profiles__item">

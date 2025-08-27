@@ -8,7 +8,7 @@ interface EventMouseLeave {
 	onMouseLeave: () => void;
 }
 
-export const useEventMouseLeave = ({
+export const usePointerEvent = ({
 	element,
 	relatedTarget,
 	onMouseEnter,

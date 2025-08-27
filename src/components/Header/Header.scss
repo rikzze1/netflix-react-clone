@@ -35,6 +35,10 @@
 			@include u.breakpoint-down(medium) {
 				width: u.rem(80);
 			}
+
+			@include u.breakpoint-down(small) {
+				width: u.rem(60);
+			}
 		}
 	}
 
@@ -42,6 +46,11 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+
+		@include u.breakpoint-down(small) {
+			justify-content: flex-start;
+			gap: 0;
+		}
 	}
 	&__nav-list {
 		display: flex;
@@ -51,6 +60,16 @@
 		font-size: u.rem(14);
 		list-style-type: none;
 		font-weight: lighter;
+
+		@include u.breakpoint-down(medium) {
+			font-size: u.rem(12);
+			gap: 0.8rem;
+		}
+
+		@include u.breakpoint-down(small) {
+			font-size: u.rem(10);
+			gap: 0.6rem;
+		}
 
 		li:nth-child(1) {
 			color: g.$clr-white;
@@ -76,10 +95,8 @@
 		align-items: center;
 		gap: 1rem;
 
-		a {
-			color: g.$clr-white;
-			font-size: u.rem(15);
-			text-decoration: none;
+		@include u.breakpoint-down(small) {
+			gap: 0.4rem;
 		}
 
 		.item {
@@ -93,6 +110,20 @@
 				width: 2.3rem;
 				height: auto;
 				border-radius: 0.3rem;
+
+				@include u.breakpoint-down(small) {
+					width: 1.8rem;
+				}
+			}
+
+			&--kids {
+				color: g.$clr-white;
+				font-size: u.rem(15);
+				text-decoration: none;
+
+				@include u.breakpoint-down(medium) {
+					display: none;
+				}
 			}
 
 			button {
@@ -132,7 +163,7 @@
 				position: absolute;
 				background-color: g.$clr-black;
 				width: u.rem(220);
-				top: 3rem;
+				top: 3.5rem;
 				right: 1rem;
 				padding: 0.8rem;
 
@@ -141,14 +172,31 @@
 				transform: translateY(-10px);
 				animation: slideIn 0.2s ease-out forwards;
 
+				.profile__caret {
+					position: absolute;
+					top: u.rem(-20);
+					right: u.rem(22);
+					transform: rotate(180deg);
+					font-size: u.rem(22);
+
+					&::after {
+						content: '▾';
+					}
+				}
+
 				.profiles {
 					display: flex;
 					flex-direction: column;
+					position: relative;
 
 					a {
 						font-size: 0.8rem;
 						&:hover {
 							text-decoration: underline;
+						}
+
+						@include u.breakpoint-down(small) {
+							font-size: u.rem(10);
 						}
 					}
 
@@ -157,6 +205,13 @@
 						align-items: center;
 						margin-bottom: 0.7rem;
 						gap: 1rem;
+
+						a {
+							color: g.$clr-white;
+							font-size: u.rem(11);
+							font-weight: lighter;
+							text-decoration: none;
+						}
 					}
 
 					.profile__settings {
@@ -164,6 +219,17 @@
 						align-items: center;
 						gap: 0.5rem;
 						margin-top: 0.7rem;
+
+						a {
+							color: g.$clr-white;
+							font-size: u.rem(11);
+							font-weight: lighter;
+							text-decoration: none;
+
+							&:hover {
+								text-decoration: underline;
+							}
+						}
 					}
 
 					.separator {
@@ -217,5 +283,14 @@
 				cursor: pointer;
 			}
 		}
+	}
+
+	@include u.breakpoint-down(small) {
+		margin-inline: 1rem;
+		padding: 0.5rem 0;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		align-items: center;
+		gap: 1rem;
 	}
 }
