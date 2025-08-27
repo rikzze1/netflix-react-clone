@@ -48,6 +48,15 @@
 			transition: 0.8s 0.4s ease-out;
 			transform: scale(0.7);
 		}
+
+		@include u.breakpoint-down(medium) {
+			width: u.rem(300);
+			margin-bottom: u.rem(30);
+		}
+		@include u.breakpoint-down(small) {
+			width: u.rem(180);
+			margin-bottom: u.rem(10);
+		}
 	}
 
 	&__description {
@@ -57,11 +66,17 @@
 		font-weight: 500;
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
 		max-width: 50ch;
-		transition: opacity 0.8s 0.4s ease-out, visibility 0.8s 0.4s ease-out;
+		transition:
+			opacity 0.8s 0.4s ease-out,
+			visibility 0.8s 0.4s ease-out;
 
 		&[data-state='small'] {
 			opacity: 0;
 			visibility: hidden;
+		}
+
+		@include u.breakpoint-down(medium) {
+			display: none;
 		}
 	}
 
@@ -70,9 +85,26 @@
 		justify-content: space-between;
 		z-index: 50;
 
+		@include u.breakpoint-down(medium) {
+			flex-direction: column;
+			gap: 1rem;
+			align-items: flex-start;
+		}
+
+		@include u.breakpoint-down(small) {
+			gap: 0.8rem;
+		}
+
 		.left-items {
 			display: flex;
 			gap: 0.8rem;
+			flex-wrap: nowrap;
+
+			@include u.breakpoint-down(small) {
+				gap: 0.5rem;
+				justify-content: space-between;
+				width: 100%;
+			}
 
 			button {
 				display: flex;
@@ -87,6 +119,17 @@
 				font-size: u.rem(16);
 				font-family: 'Netflix Sans', Arial, Helvetica, sans-serif;
 
+				@include u.breakpoint-down(medium) {
+					font-size: u.rem(14);
+					padding: 0.4rem;
+				}
+
+				@include u.breakpoint-down(small) {
+					font-size: u.rem(12);
+					padding: 0.3rem;
+					gap: 0.3rem;
+				}
+
 				&:hover {
 					cursor: pointer;
 				}
@@ -98,6 +141,16 @@
 			justify-content: center;
 			align-items: center;
 			gap: 1.5rem;
+			flex-wrap: nowrap;
+
+			@include u.breakpoint-down(medium) {
+				justify-content: flex-start;
+				gap: 1rem;
+			}
+
+			@include u.breakpoint-down(small) {
+				display: none;
+			}
 		}
 	}
 }
@@ -105,6 +158,14 @@
 .left-items > button:nth-child(1) {
 	width: 6rem;
 	background-color: g.$clr-white;
+
+	@include u.breakpoint-down(medium) {
+		width: 5rem;
+	}
+
+	@include u.breakpoint-down(small) {
+		width: 4rem;
+	}
 }
 
 .left-items > button:nth-child(2) {
@@ -113,6 +174,14 @@
 	border-radius: 0.3rem;
 	color: g.$clr-white;
 	border: none;
+
+	@include u.breakpoint-down(medium) {
+		width: 7rem;
+	}
+
+	@include u.breakpoint-down(small) {
+		width: 6rem;
+	}
 
 	&:hover {
 		background-color: rgba(g.$clr-white-30-opacity, 35%);

@@ -21,16 +21,16 @@ export const Billboard = () => {
 	});
 
 	const state = {
-		INITIAL: "initial",
-		SMALL: "small",
-	}
+		INITIAL: 'initial',
+		SMALL: 'small',
+	};
 
 	const trackMovieState = (value: string) => {
 		if (movieTitleRef.current && movieDescriptionRef.current) {
 			movieTitleRef.current.dataset.state = value;
 			movieDescriptionRef.current.dataset.state = value;
 		}
-	}
+	};
 
 	useEffect(() => {
 		setMovieInfo(prev => ({
@@ -55,9 +55,9 @@ export const Billboard = () => {
 		}));
 
 		if (movieInfo.isMuted) {
-			trackMovieState(state.SMALL)
+			trackMovieState(state.SMALL);
 		}
-	}
+	};
 
 	const toggleReplay = () => {
 		setMovieInfo(prev => ({
@@ -66,7 +66,7 @@ export const Billboard = () => {
 			isTrailerEnded: false,
 		}));
 
-		trackMovieState(state.INITIAL)
+		trackMovieState(state.INITIAL);
 	};
 
 	return (
@@ -85,7 +85,7 @@ export const Billboard = () => {
 							isTrailerEnded: true,
 						}));
 
-						trackMovieState(state.INITIAL)
+						trackMovieState(state.INITIAL);
 					}}
 				>
 					<source src="/trailer/trailer.mp4" type="video/mp4" />
@@ -124,7 +124,8 @@ export const Billboard = () => {
 						</button>
 					</div>
 					<div className="right-items">
-						{movieInfo.isTrailerPlayed && !movieInfo.isTrailerEnded ? (
+						{movieInfo.isTrailerPlayed &&
+						!movieInfo.isTrailerEnded ? (
 							<button onClick={toggleMute}>
 								{movieInfo.isMuted ? (
 									<MutedIcon
@@ -157,6 +158,6 @@ export const Billboard = () => {
 					</div>
 				</div>
 			</div>
-		</div >
+		</div>
 	);
 };
