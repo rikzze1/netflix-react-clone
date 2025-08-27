@@ -33,9 +33,11 @@ export const Header = () => {
 	const navigate = useNavigate();
 	const profileRef = useRef<HTMLDivElement>(null);
 	const searchRef = useRef<HTMLDivElement>(null);
+	const homeRef = useRef<HTMLDivElement>(null);
 
 	const [isSearchClick, setIsSearchClick] = useState(false);
 	const [isProfileClick, setIsProfileClick] = useState(false);
+	const [isHomeNavClick, setIsHomeNavClick] = useState(false);
 
 	const menu: Menu[] = [
 		{
@@ -114,6 +116,7 @@ export const Header = () => {
 		setIsSearchClick(!isSearchClick);
 	};
 	const profileSettingsToggle = () => setIsProfileClick(!isProfileClick);
+	const homeSettingsToggle = () => setIsHomeNavClick(!isHomeNavClick);
 
 	const handleProfileMouseEnter = () => {
 		setIsProfileClick(true);
@@ -121,6 +124,14 @@ export const Header = () => {
 
 	const handleProfileMouseLeave = () => {
 		setIsProfileClick(false);
+	};
+
+	const handleHomeMouseEnter = () => {
+		setIsHomeNavClick(true);
+	};
+
+	const handleHomeMouseLeave = () => {
+		setIsHomeNavClick(false);
 	};
 
 	const handleSearchClickOutside = () => {
@@ -139,6 +150,13 @@ export const Header = () => {
 		onMouseLeave: handleProfileMouseLeave,
 	});
 
+	usePointerEvent({
+		element: homeRef,
+		relatedTarget: '.header__nav-mobile ul',
+		onMouseEnter: handleHomeMouseEnter,
+		onMouseLeave: handleHomeMouseLeave,
+	});
+
 	return (
 		<nav className="header">
 			<div className="header__left-menu">
@@ -150,6 +168,23 @@ export const Header = () => {
 						return <li key={index}>{item.label}</li>;
 					})}
 				</ul>
+				<div
+					className="header__nav-mobile"
+					ref={homeRef}
+					onClick={homeSettingsToggle}
+				>
+					<span>Browse</span>
+					{isHomeNavClick && (
+						<div className="nav">
+							<span className="mobile-caret"></span>
+							<ul>
+								{menu.map((item, index) => (
+									<li key={index}>{item.label}</li>
+								))}
+							</ul>
+						</div>
+					)}
+				</div>
 			</div>
 			<div className="header__right-menu">
 				<div className="item">

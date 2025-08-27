@@ -10,7 +10,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		height: 80%;
+		height: 75%;
 	}
 
 	&__title {
@@ -46,8 +46,9 @@
 				gap: 0.5rem;
 				padding: 0.5rem;
 
-				font-weight: 600;
+				font-weight: bold;
 				font-size: u.rem(16);
+				font-family: 'Netflix Sans', Arial, Helvetica, sans-serif;
 
 				&:hover {
 					cursor: pointer;
@@ -59,7 +60,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			gap: 0.9rem;
+			gap: 1.5rem;
 		}
 	}
 }
@@ -82,6 +83,10 @@
 }
 
 .right-items > button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	padding: 0.6rem;
 	border-radius: 100%;
 	background-color: transparent;
@@ -97,7 +102,7 @@
 .rating {
 	display: flex;
 	align-items: center;
-	border-left: 2px solid g.$clr-white;
+	border-left: 3px solid g.$clr-white;
 	width: u.rem(120);
 	height: 100%;
 	padding: 0.2rem;
