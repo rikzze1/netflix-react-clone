@@ -4,4 +4,20 @@
 .container {
 	display: grid;
 	grid-template-columns: u.rem(100) 70%vh auto;
+
+	&__main {
+		display: flex;
+		flex-direction: column;
+		position: relative;
+
+		.main__movies {
+			position: absolute;
+			bottom: u.rem(130);
+			left: u.rem(70);
+			width: calc(100vw - u.rem(70));
+
+			background-color: white;
+			color: black;
+		}
+	}
 }
