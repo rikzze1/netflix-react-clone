@@ -89,6 +89,14 @@ export const Billboard = () => {
 					}}
 				>
 					<source src="/trailer/trailer.mp4" type="video/mp4" />
+					<track
+						kind="captions"
+						src="captions.vtt"
+						lang="en"
+						label="English"
+						default
+					/>
+					Your browser does not support the video.
 				</video>
 			)}
 			<div className="billboard__info">
@@ -104,9 +112,9 @@ export const Billboard = () => {
 					data-state="initial"
 					ref={movieDescriptionRef}
 				>
-					Still on the run, journalist Eddie Brock and his alien
-					companion Venom dodge threats from a vigilant military
-					leader and ruthless invading symbiotes.
+					A ruthless and effective fighter, John Preston breaks free
+					of government suppression. But will he overthrow a corrupt
+					system or fall victim to it?
 				</p>
 				<div className="billboard__buttons">
 					<div className="left-items">
