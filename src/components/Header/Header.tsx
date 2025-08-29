@@ -7,8 +7,8 @@ import userProfile2 from '@/assets/profile/user2.png';
 import userProfile3 from '@/assets/profile/user3.png';
 import userProfileKids from '@/assets/profile/kids_profile.png';
 
-import { usePointerEvent } from '@/hooks/usePointerEvent';
-import { useClickEvent } from '@/hooks/useClickEvent';
+import { usePointerEvent } from '@/hooks/events/usePointerEvent';
+import { useClickEvent } from '@/hooks/events/useClickEvent';
 
 import { SearchIcon } from '@/components/Icons/SearchIcon';
 import { NotificationIcon } from '@/components/Icons/NotificationIcon';
