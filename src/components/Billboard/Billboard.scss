@@ -7,6 +7,14 @@
 	height: 100vh;
 	position: relative;
 
+	@include u.breakpoint-down(medium) {
+		height: 70vh;
+	}
+
+	@include u.breakpoint-down(small) {
+		height: 80vh;
+	}
+
 	video {
 		position: absolute;
 		top: 0;

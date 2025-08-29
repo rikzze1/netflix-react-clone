@@ -12,12 +12,24 @@
 
 		.main__movies {
 			position: absolute;
-			bottom: u.rem(130);
+			top: 82%;
 			left: u.rem(70);
 			width: calc(100vw - u.rem(70));
+			overflow-x: hidden;
 
 			background-color: white;
 			color: black;
+
+			@include u.breakpoint-down(medium) {
+				left: u.rem(10);
+				width: 100%;
+				top: 40%;
+			}
+
+			@include u.breakpoint-down(small) {
+				left: u.rem(10);
+				top: 26%;
+			}
 		}
 	}
 }
