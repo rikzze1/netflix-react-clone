@@ -12,13 +12,11 @@
 
 		.main__movies {
 			position: absolute;
-			top: 82%;
+			top: 84%;
 			left: u.rem(70);
 			width: calc(100vw - u.rem(70));
 			overflow-x: hidden;
-
-			background-color: white;
-			color: black;
+			color: g.$clr-white;
 
 			@include u.breakpoint-down(medium) {
 				left: u.rem(10);
