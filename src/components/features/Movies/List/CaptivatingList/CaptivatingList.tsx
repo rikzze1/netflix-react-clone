@@ -1,7 +1,7 @@
 import type { MovieResponse } from '@/types/types';
 import { useRandomMovies } from '@/services/queries/random-movies.query';
 
-import { MovieCard } from '@/components/Movies/List/CaptivatingList/MovieCard/MovieCard';
+import { MovieCard } from '@/components/common/Card/MovieCard/MovieCard';
 
 import './Captivating.scss';
 

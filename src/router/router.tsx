@@ -4,9 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 const Login = lazy(() => import('@/pages/Login/Login'));
 const Home = lazy(() => import('@/pages/Home/Home'));
 
-import { SuspenseFallback } from '@/components/SuspenseFallback/SuspenseFallback';
-
-import { Preloader } from '@/components/Preloader/Preloader';
+import { SuspenseFallback } from '@/components/common/SuspenseFallback/SuspenseFallback';
+import { Preloader } from '@/components/common/Preloader/Preloader';
 
 const routes = createBrowserRouter([
 	{

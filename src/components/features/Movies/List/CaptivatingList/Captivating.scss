@@ -1,5 +1,5 @@
-@use '../../../../scss/globals' as g;
-@use '../../../../scss/util' as u;
+@use '../../../../../scss/globals' as g;
+@use '../../../../../scss/util' as u;
 @use 'sass:math';
 
 .card {
@@ -28,10 +28,9 @@
 		height: u.rem(200);
 		flex-shrink: 0;
 		border-radius: u.rem(3);
-		transition: transform 0.3s ease;
-
 		cursor: pointer;
-		background: var(--card-backdrop) center/cover no-repeat;
+		transition: background-image 0.3s ease-out;
+		background: var(--card-backdrop) center/cover no-repeat g.$clr-black;
 
 		&:hover {
 			transform: scale(1.05);
@@ -39,12 +38,22 @@
 	}
 	&__logo {
 		position: absolute;
+		opacity: 0;
 		width: u.rem(190);
 		height: u.rem(130);
-
-		background: var(--card-logo) center/contain no-repeat;
 		bottom: u.rem(50);
 		left: u.rem(40);
+		background: var(--card-logo) center/contain no-repeat;
+
+		transform: translateY(10px);
+		transition:
+			opacity 0.3s ease-out,
+			transform 0.3s ease-out;
+
+		&--loaded {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 }
 
@@ -58,5 +67,6 @@
 	color: g.$clr-white;
 	font-size: u.rem(25);
 	font-weight: 700;
+	text-shadow: u.rem(1) u.rem(1) u.rem(2) g.$clr-red;
 	z-index: 90;
 }

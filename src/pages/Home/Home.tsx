@@ -1,6 +1,6 @@
-import { Billboard } from '@/components/Billboard/Billboard';
-import { Header } from '@/components/Header/Header';
-import { Movies } from '@/components/Movies/Movies';
+import { Billboard } from '@/components/features/Billboard/Billboard';
+import { Header } from '@/components/layout/Header/Header';
+import { Movies } from '@/components/features/Movies/Movies';
 
 import './Home.scss';
 
