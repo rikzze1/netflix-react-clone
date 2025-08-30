@@ -4,4 +4,30 @@
 .container {
 	display: grid;
 	grid-template-columns: u.rem(100) 70%vh auto;
+
+	&__main {
+		display: flex;
+		flex-direction: column;
+		position: relative;
+
+		.main__movies {
+			position: absolute;
+			top: 84%;
+			left: u.rem(70);
+			width: calc(100vw - u.rem(70));
+			overflow-x: hidden;
+			color: g.$clr-white;
+
+			@include u.breakpoint-down(medium) {
+				left: u.rem(10);
+				width: 100%;
+				top: 40%;
+			}
+
+			@include u.breakpoint-down(small) {
+				left: u.rem(10);
+				top: 26%;
+			}
+		}
+	}
 }

@@ -1,11 +1,31 @@
-@use '../../scss/globals' as g;
-@use '../../scss/util' as u;
+@use '../../../scss/globals' as g;
+@use '../../../scss/util' as u;
 
 .billboard {
 	background: url('../../assets/Billboard/billboard.webp') center/cover
 		no-repeat;
 	height: 100vh;
 	position: relative;
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 30%;
+		background: linear-gradient(transparent, g.$clr-black);
+		pointer-events: none;
+		z-index: 5;
+	}
+
+	@include u.breakpoint-down(medium) {
+		height: 70vh;
+	}
+
+	@include u.breakpoint-down(small) {
+		height: 80vh;
+	}
 
 	video {
 		position: absolute;
@@ -54,14 +74,14 @@
 
 		&[data-state='small'] {
 			transition: 0.8s 0.4s ease-out;
-			transform: scale(0.7) translateX(-200px) translateY(200px);
+			transform: scale(0.7) translateX(u.rem(-150)) translateY(200px);
 
 			@include u.breakpoint-down(medium) {
-				transform: scale(0.7) translateX(-50px) translateY(20px);
+				transform: scale(0.7) translateX(u.rem(-60)) translateY(20px);
 			}
 
 			@include u.breakpoint-down(small) {
-				transform: scale(0.7) translateX(-20px) translateY(10px);
+				transform: scale(0.7) translateX(u.rem(-40)) translateY(10px);
 			}
 		}
 
@@ -108,7 +128,7 @@
 
 		.left-items {
 			display: flex;
-			gap: 0.8rem;
+			gap: 1rem;
 			flex-wrap: nowrap;
 
 			@include u.breakpoint-down(small) {
@@ -123,10 +143,10 @@
 				justify-content: center;
 				border-radius: 0.3rem;
 				border: 1px solid g.$clr-black;
-				gap: 0.5rem;
-				padding: 0.5rem;
+				gap: 0.9rem;
+				padding: 0.8rem;
 
-				font-size: u.rem(16);
+				font-size: u.rem(22);
 				font-family: 'Netflix Sans', Arial, Helvetica, sans-serif;
 
 				@include u.breakpoint-down(medium) {
@@ -176,7 +196,8 @@
 }
 
 .left-items > button:nth-child(1) {
-	width: 6rem;
+	width: u.rem(170);
+	height: u.rem(60);
 	background-color: g.$clr-white;
 	border: none;
 
@@ -194,7 +215,7 @@
 }
 
 .left-items > button:nth-child(2) {
-	width: 9rem;
+	width: u.rem(200);
 	background-color: rgba(g.$clr-white-30-opacity, 55%);
 	border-radius: 0.3rem;
 	color: g.$clr-white;

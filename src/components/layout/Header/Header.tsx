@@ -7,15 +7,15 @@ import userProfile2 from '@/assets/profile/user2.png';
 import userProfile3 from '@/assets/profile/user3.png';
 import userProfileKids from '@/assets/profile/kids_profile.png';
 
-import { usePointerEvent } from '@/hooks/usePointerEvent';
-import { useClickEvent } from '@/hooks/useClickEvent';
+import { usePointerEvent } from '@/hooks/events/usePointerEvent';
+import { useClickEvent } from '@/hooks/events/useClickEvent';
 
-import { SearchIcon } from '@/components/Icons/SearchIcon';
-import { NotificationIcon } from '@/components/Icons/NotificationIcon';
-import { ManageProfileIcon } from '@/components/Icons/Profile';
-import { TransferProfileIcon } from '@/components/Icons/TransferProfileIcon';
-import { AccountIcon } from '@/components/Icons/AccountIcon';
-import { HelpCenterIcon } from '@/components/Icons/HelpCenterIcon';
+import { SearchIcon } from '@/components/common/Icons/SearchIcon';
+import { NotificationIcon } from '@/components/common/Icons/NotificationIcon';
+import { ManageProfileIcon } from '@/components/common/Icons/Profile';
+import { TransferProfileIcon } from '@/components/common/Icons/TransferProfileIcon';
+import { AccountIcon } from '@/components/common/Icons/AccountIcon';
+import { HelpCenterIcon } from '@/components/common/Icons/HelpCenterIcon';
 
 import './Header.scss';
 

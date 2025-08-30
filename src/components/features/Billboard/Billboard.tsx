@@ -2,11 +2,11 @@ import { useEffect, useState, useRef } from 'react';
 
 import billboardImage from '@/assets/Billboard/title.png';
 
-import { MoreInfoIcon } from '@/components/Icons/MoreInfoIcon';
-import { ReplayIcon } from '@/components/Icons/ReplayIcon';
-import { PlayIcon } from '@/components/Icons/PlayIcon';
-import { NotMutedIcon } from '@/components/Icons/NotMutedIcon';
-import { MutedIcon } from '@/components/Icons/MutedIcon';
+import { MoreInfoIcon } from '@/components/common/Icons/MoreInfoIcon';
+import { ReplayIcon } from '@/components/common/Icons/ReplayIcon';
+import { PlayIcon } from '@/components/common/Icons/PlayIcon';
+import { NotMutedIcon } from '@/components/common/Icons/NotMutedIcon';
+import { MutedIcon } from '@/components/common/Icons/MutedIcon';
 
 import './Billboard.scss';
 
