@@ -9,10 +9,12 @@
 		display: flex;
 		flex-direction: column;
 		position: relative;
+		height: 100vh; // Define explicit height to prevent layout shift
+		min-height: 100vh; // Ensure stability
 
 		.main__movies {
 			position: absolute;
-			top: 84%;
+			top: 84vh; // Use vh instead of % for more stable positioning
 			left: u.rem(70);
 			width: calc(100vw - u.rem(70));
 			overflow-x: hidden;
@@ -21,12 +23,12 @@
 			@include u.breakpoint-down(medium) {
 				left: u.rem(10);
 				width: 100%;
-				top: 40%;
+				top: 60vh; // Use vh for consistent positioning
 			}
 
 			@include u.breakpoint-down(small) {
 				left: u.rem(10);
-				top: 26%;
+				top: 36vh; // Use vh for consistent positioning
 			}
 		}
 	}

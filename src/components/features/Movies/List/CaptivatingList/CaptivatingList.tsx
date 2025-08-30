@@ -1,5 +1,5 @@
 import type { MovieResponse } from '@/types/types';
-import { useRandomMovies } from '@/services/queries/random-movies.query';
+import { useRandomMovies } from '@/services/tmdb/queries/random-movies.query';
 
 import { MovieCard } from '@/components/common/Card/MovieCard/MovieCard';
 

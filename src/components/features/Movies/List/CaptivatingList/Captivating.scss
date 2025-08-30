@@ -7,11 +7,19 @@
 	flex-direction: column;
 	height: 100%;
 	gap: 0.5rem;
-	padding: 2px;
+	padding: u.rem(2);
+	min-height: u.rem(200);
 
 	&__title {
 		font-weight: bolder;
 		font-size: u.rem(25);
+
+		@include u.breakpoint-down(medium) {
+			font-size: u.rem(19);
+		}
+		@include u.breakpoint-down(small) {
+			font-size: u.rem(15);
+		}
 	}
 
 	&__list {
@@ -23,14 +31,15 @@
 	}
 
 	&__poster {
+		background: var(--card-backdrop) center/cover no-repeat g.$clr-black;
 		position: relative;
 		min-width: u.rem(370);
 		height: u.rem(200);
+		min-height: u.rem(200);
 		flex-shrink: 0;
 		border-radius: u.rem(3);
 		cursor: pointer;
 		transition: background-image 0.3s ease-out;
-		background: var(--card-backdrop) center/cover no-repeat g.$clr-black;
 
 		&:hover {
 			transform: scale(1.05);
@@ -45,7 +54,7 @@
 		left: u.rem(40);
 		background: var(--card-logo) center/contain no-repeat;
 
-		transform: translateY(10px);
+		transform: translateY(u.rem(10));
 		transition:
 			opacity 0.3s ease-out,
 			transform 0.3s ease-out;

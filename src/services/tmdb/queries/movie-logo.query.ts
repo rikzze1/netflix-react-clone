@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { instance } from '@/services/axios/instance';
 
-export function useMovieLogo(id: string, hasIntersected: boolean) {
+export function useMovieLogo(id: string, hasIntersected?: boolean) {
 	return useQuery({
 		queryKey: ['movie-logo', id],
 		queryFn: async () => {
@@ -11,5 +11,7 @@ export function useMovieLogo(id: string, hasIntersected: boolean) {
 			return response.data;
 		},
 		enabled: !!id && hasIntersected,
+		refetchOnMount: false,
+		staleTime: 5 * 60 * 1000,
 	});
 }

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { useIntersectionObserver } from 'usehooks-ts';
 
 import type { MovieResponse } from '@/types/types';
-import { useMovieLogo } from '@/services/queries/movie-logo.query';
+import { useMovieLogo } from '@/services/tmdb/queries/movie-logo.query';
 import { getTmdbImageUrl } from '@/util/getTmdbImageUrl';
 
 export const MovieCard = ({ id = 8, title, backdrop_path }: MovieResponse) => {

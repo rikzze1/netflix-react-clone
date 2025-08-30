@@ -8,10 +8,12 @@ import './Preloader.scss';
 export const Preloader = () => {
 	const navigate = useNavigate();
 
+	const SEC_DELAY_TO_REDIRECT = 2000;
+
 	useEffect(() => {
 		const timeId = setTimeout(() => {
 			navigate('/browse');
-		}, 2000);
+		}, SEC_DELAY_TO_REDIRECT);
 		return () => clearTimeout(timeId);
 	}, [navigate]);
 

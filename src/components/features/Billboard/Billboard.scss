@@ -2,9 +2,10 @@
 @use '../../../scss/util' as u;
 
 .billboard {
-	background: url('../../assets/Billboard/billboard.webp') center/cover
-		no-repeat;
+	background: var(--billboard-backdrop) center/cover no-repeat;
+	background-color: g.$clr-black;
 	height: 100vh;
+	min-height: 100vh;
 	position: relative;
 
 	&::after {
@@ -27,13 +28,13 @@
 		height: 80vh;
 	}
 
-	video {
+	iframe {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
+		border: none;
 		opacity: 0;
 		animation: fadeInVideo 1s ease-in-out 0.5s forwards;
 	}
@@ -57,15 +58,15 @@
 		height: 70%;
 
 		@include u.breakpoint-down(medium) {
-			height: 35%;
+			height: 55%;
 		}
 		@include u.breakpoint-down(small) {
-			height: 20%;
+			height: 30%;
 		}
 	}
 
 	&__title {
-		width: u.rem(700);
+		width: u.rem(500);
 		z-index: 50;
 
 		&:hover {
@@ -74,14 +75,16 @@
 
 		&[data-state='small'] {
 			transition: 0.8s 0.4s ease-out;
-			transform: scale(0.7) translateX(u.rem(-150)) translateY(200px);
+			transform: scale(0.7) translateX(u.rem(-120)) translateY(u.rem(100));
 
 			@include u.breakpoint-down(medium) {
-				transform: scale(0.7) translateX(u.rem(-60)) translateY(20px);
+				transform: scale(0.7) translateX(u.rem(-60))
+					translateY(u.rem(20));
 			}
 
 			@include u.breakpoint-down(small) {
-				transform: scale(0.7) translateX(u.rem(-40)) translateY(10px);
+				transform: scale(0.7) translateX(u.rem(-40))
+					translateY(u.rem(10));
 			}
 		}
 
@@ -91,17 +94,39 @@
 		}
 		@include u.breakpoint-down(small) {
 			width: u.rem(180);
-			margin-bottom: u.rem(10);
+			margin-bottom: u.rem(30);
+		}
+	}
+
+	&__fallback--title {
+		color: g.$clr-white;
+		text-shadow: 1px 1px 1px red;
+		font-size: u.rem(60);
+		transform: scale(0.7) translateX(u.rem(-100)) translateY(180px);
+
+		@include u.breakpoint-down(medium) {
+			transform: scale(0.7) translateX(u.rem(-60)) translateY(20px);
+		}
+
+		@include u.breakpoint-down(small) {
+			transform: scale(0.7) translateX(u.rem(-40)) translateY(10px);
 		}
 	}
 
 	&__description {
 		z-index: 50;
 		color: g.$clr-white;
-		font-size: u.rem(23);
+		font-size: u.rem(20);
 		font-weight: 500;
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
 		max-width: 50ch;
+
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		line-clamp: 3;
+		overflow: hidden;
+		text-overflow: ellipsis;
 
 		&[data-state='small'] {
 			opacity: 0;
@@ -202,11 +227,12 @@
 	border: none;
 
 	@include u.breakpoint-down(medium) {
-		width: 5rem;
+		width: 8rem;
 	}
 
 	@include u.breakpoint-down(small) {
-		width: 4rem;
+		width: 5rem;
+		height: 3rem;
 	}
 
 	&:hover {
@@ -222,7 +248,7 @@
 	border: none;
 
 	@include u.breakpoint-down(medium) {
-		width: 7rem;
+		width: 8rem;
 	}
 
 	@include u.breakpoint-down(small) {

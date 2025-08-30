@@ -4,7 +4,7 @@
 .header {
 	display: flex;
 	justify-content: space-between;
-	margin-inline: 2.8rem;
+	// background-color: g.$clr-black;
 	padding-top: 0.5rem;
 
 	position: fixed;
@@ -46,6 +46,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		margin-left: u.rem(40);
 
 		@include u.breakpoint-down(small) {
 			justify-content: flex-start;
@@ -251,7 +252,7 @@
 				.profile__caret {
 					position: absolute;
 					top: u.rem(-20);
-					right: u.rem(22);
+					right: u.rem(12);
 					transform: rotate(180deg);
 					font-size: u.rem(22);
 
@@ -351,7 +352,8 @@
 					content: '▾';
 					transition: transform 0.3s ease;
 					display: inline-block;
-					font-size: u.rem(19);
+					font-size: u.rem(15);
+					margin-right: u.rem(45);
 				}
 			}
 

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { instance } from '../axios/instance';
+import { instance } from '../../axios/instance';
 
 export function useCreateGuessSession({
 	enabled = true,

@@ -1,6 +1,12 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, type CSSProperties } from 'react';
 
-import billboardImage from '@/assets/Billboard/title.png';
+import type { MovieResponse } from '@/types/types';
+import { getTmdbImageUrl } from '@/util/getTmdbImageUrl';
+import { getYoutubeEmbedUrl } from '@/util/getYoutubeEmbedUrl';
+
+import { useRandomMovies } from '@/services/tmdb/queries/random-movies.query';
+import { useMovieLogo } from '@/services/tmdb/queries/movie-logo.query';
+import { useMovieTrailer } from '@/services/tmdb/queries/movie-trailer';
 
 import { MoreInfoIcon } from '@/components/common/Icons/MoreInfoIcon';
 import { ReplayIcon } from '@/components/common/Icons/ReplayIcon';
@@ -8,15 +14,15 @@ import { PlayIcon } from '@/components/common/Icons/PlayIcon';
 import { NotMutedIcon } from '@/components/common/Icons/NotMutedIcon';
 import { MutedIcon } from '@/components/common/Icons/MutedIcon';
 
-// import { useRandomMovies } from '@/services/queries/random-movies.query';
-
 import './Billboard.scss';
 
 export const Billboard = () => {
 	const movieTitleRef = useRef<HTMLImageElement>(null);
 	const movieDescriptionRef = useRef<HTMLParagraphElement>(null);
 
-	// const { data, isSuccess } = useRandomMovies(); const featuredMovie = data?.results[5]
+	const MOVIE_BILLBOARD_INDEX = 5;
+	const SEC_TO_END_VID = 40000;
+	const SEC_DELAY_TO_PLAY_VID = 2000;
 
 	const [movieInfo, setMovieInfo] = useState({
 		isTrailerPlayed: false,
@@ -28,6 +34,30 @@ export const Billboard = () => {
 		INITIAL: 'initial',
 		SMALL: 'small',
 	};
+
+	const { data: movieData, isSuccess: isFetchMovieSuccess } =
+		useRandomMovies();
+
+	const { id, title, backdrop_path, overview }: MovieResponse =
+		movieData?.results[MOVIE_BILLBOARD_INDEX] ?? {};
+
+	const { data: movieLogo, isSuccess: isFetchMovieLogo } = useMovieLogo(
+		movieData ? String(id) : ''
+	);
+
+	const logo = movieLogo?.logos[0]?.file_path ?? '';
+
+	const { data: movieTrailer, isSuccess: isFetchMovieTrailer } =
+		useMovieTrailer({ key: isFetchMovieSuccess ? String(id) : '' });
+
+	const trailer = movieTrailer?.results?.find(
+		(video: { type: string }) => video.type === 'Trailer'
+	);
+
+	const url = getYoutubeEmbedUrl({
+		key: trailer?.key,
+		mute: movieInfo.isMuted ? '1' : '0',
+	});
 
 	const setTractMovieState = (value: string) => {
 		if (movieTitleRef.current && movieDescriptionRef.current) {
@@ -49,8 +79,22 @@ export const Billboard = () => {
 			return () => {
 				clearTimeout(timeId);
 			};
-		}, 2000);
+		}, SEC_DELAY_TO_PLAY_VID);
 	}, []);
+
+	useEffect(() => {
+		if (movieInfo.isTrailerPlayed && !movieInfo.isTrailerEnded) {
+			const timer = setTimeout(() => {
+				setMovieInfo(prev => ({
+					...prev,
+					isTrailerEnded: true,
+				}));
+				setTractMovieState(state.INITIAL);
+			}, SEC_TO_END_VID);
+
+			return () => clearTimeout(timer);
+		}
+	}, [movieInfo.isTrailerEnded, movieInfo.isTrailerPlayed, state.INITIAL]);
 
 	const toggleMute = () => {
 		setMovieInfo(prev => ({
@@ -73,108 +117,104 @@ export const Billboard = () => {
 		setTractMovieState(state.INITIAL);
 	};
 
-	// useEffect(() => {
-	// 	if (isSuccess) console.log(data?.results[5])
-
-	// }, [data, isSuccess])
-
-	return (
-		<div className="billboard">
-			{movieInfo.isTrailerPlayed && !movieInfo.isTrailerEnded && (
-				<video
-					width="100%"
-					height="auto"
-					autoPlay
-					muted={movieInfo.isMuted}
-					playsInline
-					poster={billboardImage}
-					onEnded={() => {
-						setMovieInfo(prev => ({
-							...prev,
-							isTrailerEnded: true,
-						}));
-
-						setTractMovieState(state.INITIAL);
-					}}
-				>
-					<source src="/trailer/trailer.mp4" type="video/mp4" />
-					<track
-						kind="captions"
-						src="captions.vtt"
-						lang="en"
-						label="English"
-						default
+	if (isFetchMovieSuccess && movieData)
+		return (
+			<div
+				className="billboard"
+				style={
+					{
+						'--billboard-backdrop': backdrop_path
+							? `url("${getTmdbImageUrl(backdrop_path, 'ORIGINAL')}")`
+							: 'none',
+					} as CSSProperties
+				}
+			>
+				{movieInfo.isTrailerPlayed && !movieInfo.isTrailerEnded && (
+					<iframe
+						width="100%"
+						height="100%"
+						title="trailer"
+						frameBorder="0"
+						allow="autoplay; encrypted-media"
+						src={isFetchMovieTrailer ? url : ''}
 					/>
-					Your browser does not support the video.
-				</video>
-			)}
-			<div className="billboard__info">
-				<img
-					className="billboard__title"
-					data-state="initial"
-					src={billboardImage}
-					alt="Billboard"
-					ref={movieTitleRef}
-				/>
-				<p
-					className="billboard__description"
-					data-state="initial"
-					ref={movieDescriptionRef}
-				>
-					A ruthless and effective fighter, John Preston breaks free
-					of government suppression. But will he overthrow a corrupt
-					system or fall victim to it?
-				</p>
-				<div className="billboard__buttons">
-					<div className="left-items">
-						<button>
-							<PlayIcon color="black" width="24" height="24" />
-							Play
-						</button>
-						<button>
-							<MoreInfoIcon
-								color="white"
-								width="24"
-								height="24"
-							/>
-							More Info
-						</button>
-					</div>
-					<div className="right-items">
-						{movieInfo.isTrailerPlayed &&
-						!movieInfo.isTrailerEnded ? (
-							<button onClick={toggleMute}>
-								{movieInfo.isMuted ? (
-									<MutedIcon
-										color="white"
-										width="20"
-										height="20"
-									/>
-								) : (
-									<NotMutedIcon
-										color="white"
-										width="20"
-										height="20"
-									/>
-								)}
+				)}
+				<div className="billboard__info">
+					{isFetchMovieLogo && movieLogo ? (
+						<img
+							className="billboard__title"
+							data-state="initial"
+							src={getTmdbImageUrl(logo, 'MEDIUM')}
+							alt={title}
+							ref={movieTitleRef}
+						/>
+					) : (
+						<h3 className="billboard__fallback--title">{title}</h3>
+					)}
+
+					{overview && (
+						<p
+							className="billboard__description"
+							data-state="initial"
+							ref={movieDescriptionRef}
+						>
+							{overview}
+						</p>
+					)}
+					<div className="billboard__buttons">
+						<div className="left-items">
+							<button>
+								<PlayIcon
+									color="black"
+									width="24"
+									height="24"
+								/>
+								Play
 							</button>
-						) : (
-							movieInfo.isTrailerEnded && (
-								<button onClick={toggleReplay}>
-									<ReplayIcon
-										color="white"
-										width="20"
-										height="20"
-									/>
+							<button>
+								<MoreInfoIcon
+									color="white"
+									width="24"
+									height="24"
+								/>
+								More Info
+							</button>
+						</div>
+						<div className="right-items">
+							{movieInfo.isTrailerPlayed &&
+							!movieInfo.isTrailerEnded ? (
+								<button onClick={toggleMute}>
+									{movieInfo.isMuted ? (
+										<MutedIcon
+											color="white"
+											width="20"
+											height="20"
+										/>
+									) : (
+										<NotMutedIcon
+											color="white"
+											width="20"
+											height="20"
+										/>
+									)}
 								</button>
-							)
-						)}
-						<div className="rating">
-							<span>16+</span>
+							) : (
+								movieInfo.isTrailerEnded && (
+									<button onClick={toggleReplay}>
+										<ReplayIcon
+											color="white"
+											width="20"
+											height="20"
+										/>
+									</button>
+								)
+							)}
+							<div className="rating">
+								<span>16+</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	);
+		);
 };

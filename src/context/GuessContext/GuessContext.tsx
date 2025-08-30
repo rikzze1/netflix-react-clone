@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react';
 import type { PropsWithChildren } from 'react';
 
 import { useGuessSessionStore } from '@/stores/auth.store';
-import { useCreateGuessSession } from '@/services/queries/auth.query';
+import { useCreateGuessSession } from '@/services/tmdb/queries/auth.query';
 import { GuessContext } from '@/context/GuessContext/GuessProvider';
 import { isSessionExpired } from '@/util/dateChecker';
 
