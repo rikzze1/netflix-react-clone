@@ -8,11 +8,15 @@ import { PlayIcon } from '@/components/common/Icons/PlayIcon';
 import { NotMutedIcon } from '@/components/common/Icons/NotMutedIcon';
 import { MutedIcon } from '@/components/common/Icons/MutedIcon';
 
+// import { useRandomMovies } from '@/services/queries/random-movies.query';
+
 import './Billboard.scss';
 
 export const Billboard = () => {
 	const movieTitleRef = useRef<HTMLImageElement>(null);
 	const movieDescriptionRef = useRef<HTMLParagraphElement>(null);
+
+	// const { data, isSuccess } = useRandomMovies(); const featuredMovie = data?.results[5]
 
 	const [movieInfo, setMovieInfo] = useState({
 		isTrailerPlayed: false,
@@ -25,7 +29,7 @@ export const Billboard = () => {
 		SMALL: 'small',
 	};
 
-	const trackMovieState = (value: string) => {
+	const setTractMovieState = (value: string) => {
 		if (movieTitleRef.current && movieDescriptionRef.current) {
 			movieTitleRef.current.dataset.state = value;
 			movieDescriptionRef.current.dataset.state = value;
@@ -55,7 +59,7 @@ export const Billboard = () => {
 		}));
 
 		if (movieInfo.isMuted) {
-			trackMovieState(state.SMALL);
+			setTractMovieState(state.SMALL);
 		}
 	};
 
@@ -66,8 +70,13 @@ export const Billboard = () => {
 			isTrailerEnded: false,
 		}));
 
-		trackMovieState(state.INITIAL);
+		setTractMovieState(state.INITIAL);
 	};
+
+	// useEffect(() => {
+	// 	if (isSuccess) console.log(data?.results[5])
+
+	// }, [data, isSuccess])
 
 	return (
 		<div className="billboard">
@@ -85,7 +94,7 @@ export const Billboard = () => {
 							isTrailerEnded: true,
 						}));
 
-						trackMovieState(state.INITIAL);
+						setTractMovieState(state.INITIAL);
 					}}
 				>
 					<source src="/trailer/trailer.mp4" type="video/mp4" />

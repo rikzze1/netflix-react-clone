@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { instance } from '@/services/axios/instance';
 import { TMDB_GENRE_CONFIG } from '@/services/tmdb/constants';
 
-export function useRandomMovies() {
+export function useRandomMovies(pickGenre: string | null = null) {
 	const currentYear = new Date().getFullYear();
 	const MIN_YEAR = 1997;
 	const randomYear =
@@ -11,6 +11,8 @@ export function useRandomMovies() {
 	const SCIFI = TMDB_GENRE_CONFIG.SCIENCE_FICTION;
 	const CRIME = TMDB_GENRE_CONFIG.THRILLER;
 
+	const genres = [SCIFI, CRIME, pickGenre].filter(Boolean).join(',');
+
 	return useQuery({
 		queryKey: ['random-movies'],
 		queryFn: async () => {
@@ -18,7 +20,7 @@ export function useRandomMovies() {
 				params: {
 					primary_release_year: randomYear,
 					sort_by: 'vote_count.desc',
-					with_genres: `${SCIFI},${CRIME}`,
+					with_genres: genres,
 				},
 			});
 			return response.data;
