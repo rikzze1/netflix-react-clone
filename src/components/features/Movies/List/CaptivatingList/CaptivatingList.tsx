@@ -7,6 +7,7 @@ import { MovieCard } from '@/components/common/Card/MovieCard/MovieCard';
 import { MovieSkeleton } from '@/components/common/SkeletonLoader/MovieSkeleton/MovieSkeleton';
 
 import './Captivating.scss';
+import { ArrowIcon } from '@/components/common/Icons/ArrowIcon';
 
 export const CaptivatingList = () => {
 	const { data: randomMoviesData, isSuccess: isSuccessRandomMovies } =
@@ -16,14 +17,9 @@ export const CaptivatingList = () => {
 
 	const SKELETON_NUM = 10;
 
-	console.log('🔍 Debug:', {
-		isSuccessRandomMovies,
-		hasData: !!randomMoviesData,
-	});
-
 	return (
 		<>
-			{isSuccessRandomMovies && randomMoviesData ? (
+			{!isSuccessRandomMovies || !randomMoviesData ? (
 				<div className='card'>
 					<div className='card__list'>
 						<MovieSkeleton length={SKELETON_NUM} />
@@ -44,6 +40,12 @@ export const CaptivatingList = () => {
 								</div>
 							)
 						)}
+						<button className='card__list--left-caret'>
+							<ArrowIcon color='white' height='22' width='22' />
+						</button>
+						<button className='card__list--right-caret'>
+							<ArrowIcon color='white' height='22' width='22' />
+						</button>
 					</div>
 				</div>
 			)}

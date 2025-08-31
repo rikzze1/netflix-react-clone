@@ -24,10 +24,49 @@
 
 	&__list {
 		display: flex;
+		position: relative;
 		gap: 0.6rem;
 		padding: 2px;
 		overflow-x: auto;
 		border-radius: u.rem(10);
+
+		.wrap {
+			background-color: blue;
+		}
+
+		&--left-caret {
+			display: flex;
+			align-items: center;
+			position: absolute;
+			left: u.rem(10);
+			height: 100%;
+			z-index: 60;
+			padding: 0 u.rem(10);
+			transform: rotate(180deg);
+		}
+
+		&--right-caret {
+			display: flex;
+			align-items: center;
+			position: absolute;
+			z-index: 60;
+			padding: 0 u.rem(10);
+			right: u.rem(10);
+			height: 100%;
+		}
+
+		&--left-caret,
+		&--right-caret {
+			background-color: transparent;
+			opacity: 0;
+			border: none;
+
+			&:hover {
+				opacity: 1;
+				cursor: pointer;
+				background-color: rgba(g.$clr-black, 50%);
+			}
+		}
 	}
 
 	&__poster {

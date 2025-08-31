@@ -4,17 +4,29 @@
 .skeleton {
 	display: flex;
 	gap: u.rem(16);
-	width: 100%;
-	height: u.rem(157);
-	overflow-x: auto;
-	background-color: blue;
 	border-radius: u.rem(8);
 
 	&__card {
-		width: 100%;
-		height: u.rem(157);
-		background-color: pink;
-		min-width: u.rem(280);
+		position: relative;
+		overflow: hidden;
+		min-height: u.rem(200);
+		width: u.rem(300);
+		background-color: g.$clr-black;
 		border-radius: u.rem(8);
+
+		&__shimmer {
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+
+			background: linear-gradient(
+				90deg,
+				transparent,
+				rgba(255, 255, 255, 0.2),
+				transparent
+			);
+		}
 	}
 }

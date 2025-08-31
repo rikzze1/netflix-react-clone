@@ -5,7 +5,7 @@ export function useMovieList({
 	genres = [],
 }: { genres?: (string | number)[] } = {}) {
 	const currentYear = new Date().getFullYear();
-	const MIN_YEAR = 1997;
+	const MIN_YEAR = 2006;
 
 	const randomYear =
 		Math.floor(Math.random() * (currentYear - MIN_YEAR)) + MIN_YEAR;

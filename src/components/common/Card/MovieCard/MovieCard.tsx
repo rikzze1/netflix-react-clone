@@ -28,7 +28,7 @@ export const MovieCard = ({ id = 8, title, backdrop_path }: MovieResponse) => {
 			style={
 				{
 					'--card-backdrop': hasBackdropAndIntersected
-						? `url(${getTmdbImageUrl(backdrop_path, 'MEDIUM')})`
+						? `url(${getTmdbImageUrl(backdrop_path, 'ORIGINAL')})`
 						: '',
 				} as CSSProperties
 			}
