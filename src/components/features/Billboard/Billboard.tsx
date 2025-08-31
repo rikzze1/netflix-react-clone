@@ -5,9 +5,9 @@ import { getTmdbImageUrl } from '@/util/getTmdbImageUrl';
 import { getYoutubeEmbedUrl } from '@/util/getYoutubeEmbedUrl';
 import { useMovieInfoStore } from '@/stores/header.store';
 
-import { useMovieList } from '@/services/tmdb/queries/movie-list';
-import { useMovieLogo } from '@/services/tmdb/queries/movie-logo.query';
-import { useMovieTrailer } from '@/services/tmdb/queries/movie-trailer';
+import { useContent } from '@/services/tmdb/queries/content.query';
+import { useLogo } from '@/services/tmdb/queries/logo.query';
+import { useTrailer } from '@/services/tmdb/queries/trailer';
 
 import { MoreInfoIcon } from '@/components/common/Icons/MoreInfoIcon';
 import { ReplayIcon } from '@/components/common/Icons/ReplayIcon';
@@ -16,7 +16,7 @@ import { NotMutedIcon } from '@/components/common/Icons/NotMutedIcon';
 import { MutedIcon } from '@/components/common/Icons/MutedIcon';
 
 import './Billboard.scss';
-import { TMDB_GENRE_CONFIG } from '@/services/tmdb/constants';
+import { TMDB_MOVIE_GENRE } from '@/services/tmdb/constants';
 
 const MOVIE_BILLBOARD_INDEX = 5;
 const SEC_TO_END_VID = 30000;
@@ -144,23 +144,24 @@ export const Billboard = () => {
 
 	const { setTrackTrailerState: setGlobalTrailerState } = useMovieInfoStore();
 
-	const { data: movieData, isSuccess: isFetchMovieSuccess } = useMovieList({
-		genres: [TMDB_GENRE_CONFIG.SCIENCE_FICTION, TMDB_GENRE_CONFIG.THRILLER],
+	const { data: movieData, isSuccess: isFetchMovieSuccess } = useContent({
+		type: 'movie',
+		genres: [TMDB_MOVIE_GENRE.SCIENCE_FICTION, TMDB_MOVIE_GENRE.THRILLER],
 	});
 
 	const { id, title, backdrop_path, overview }: MovieResponse =
 		movieData?.results[MOVIE_BILLBOARD_INDEX] ?? {};
 
-	const { data: movieLogo, isSuccess: isFetchMovieLogo } = useMovieLogo(
-		movieData ? String(id) : ''
-	);
+	const { data: movieLogo, isSuccess: isFetchMovieLogo } = useLogo({
+		type: 'movie',
+		id: movieData ? String(id) : '',
+	});
 
 	const logo = movieLogo?.logos[0]?.file_path ?? '';
 
-	const { data: movieTrailer, isSuccess: isFetchMovieTrailer } =
-		useMovieTrailer({
-			key: isFetchMovieSuccess ? String(id) : '',
-		});
+	const { data: movieTrailer, isSuccess: isFetchMovieTrailer } = useTrailer({
+		key: isFetchMovieSuccess ? String(id) : '',
+	});
 
 	const trailer = movieTrailer?.results?.find(
 		(video: { type: string }) => video.type === 'Trailer'

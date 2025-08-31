@@ -6,7 +6,9 @@ export interface IconProps {
 
 export interface MovieResponse {
 	id: number;
-	title: string;
+	title?: string;
+	original_name?: string;
+	original_title?: string;
 	backdrop_path: string;
 	overview?: string;
 }

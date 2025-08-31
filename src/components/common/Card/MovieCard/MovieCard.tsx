@@ -3,16 +3,22 @@ import clsx from 'clsx';
 import { useIntersectionObserver } from 'usehooks-ts';
 
 import type { MovieResponse } from '@/types/types';
-import { useMovieLogo } from '@/services/tmdb/queries/movie-logo.query';
+import { useLogo } from '@/services/tmdb/queries/logo.query';
 import { getTmdbImageUrl } from '@/util/getTmdbImageUrl';
 
-export const MovieCard = ({ id = 8, title, backdrop_path }: MovieResponse) => {
+export const MovieCard = ({
+	id = 8,
+	title,
+	backdrop_path,
+	type,
+}: MovieResponse & { type: 'movie' | 'tv' }) => {
 	const { isIntersecting, ref: intersectionRef } = useIntersectionObserver();
 
-	const { data: movieLogoData, isSuccess: isSuccessMovieLogo } = useMovieLogo(
-		String(id),
-		isIntersecting
-	);
+	const { data: movieLogoData, isSuccess: isSuccessMovieLogo } = useLogo({
+		type,
+		id: String(id),
+		hasIntersected: isIntersecting,
+	});
 
 	const logo = movieLogoData?.logos[1]?.file_path ?? '';
 

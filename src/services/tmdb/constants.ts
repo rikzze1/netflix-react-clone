@@ -9,7 +9,7 @@ export const TMDB_IMAGE_CONFIG = {
 	},
 } as const;
 
-export const TMDB_GENRE_CONFIG = {
+export const TMDB_MOVIE_GENRE = {
 	ACTION: '28',
 	ADVENTURE: '12',
 	ANIMATION: '16',
@@ -28,5 +28,24 @@ export const TMDB_GENRE_CONFIG = {
 	TV_MOVIE: '10770',
 	THRILLER: '53',
 	WAR: '10752',
+	WESTERN: '37',
+};
+
+export const TMDB_TV_GENRE = {
+	ACTION_ADVENTURE: '10759',
+	ANIMATION: '16',
+	COMEDY: '35',
+	CRIME: '80',
+	DOCUMENTARY: '99',
+	DRAMA: '18',
+	FAMILY: '10751',
+	KIDS: '10762',
+	MYSTERY: '9648',
+	NEWS: '10763',
+	REALITY: '10764',
+	SCI_FI_FANTASY: '10765',
+	SOAP: '10766',
+	TALK: '10767',
+	WAR_POLITICS: '10768',
 	WESTERN: '37',
 };

@@ -1,8 +1,8 @@
 import { Billboard } from '@/components/features/Billboard/Billboard';
 import { Header } from '@/components/layout/Header/Header';
-import { Movies } from '@/components/features/Movies/Movies';
 
 import './Home.scss';
+import { HomeList } from '@/components/features/List/Home/HomeList';
 
 const Home = () => {
 	return (
@@ -13,7 +13,7 @@ const Home = () => {
 					<Billboard />
 				</div>
 				<div className='main__movies'>
-					<Movies />
+					<HomeList />
 				</div>
 			</main>
 		</div>

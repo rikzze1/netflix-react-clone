@@ -1,25 +1,28 @@
 import { useRef } from 'react';
 import type { MovieResponse } from '@/types/types';
 
-import { TMDB_GENRE_CONFIG } from '@/services/tmdb/constants';
-import { useMovieList } from '@/services/tmdb/queries/movie-list';
+import { useContent } from '@/services/tmdb/queries/content.query';
 
 import { MovieCard } from '@/components/common/Card/MovieCard/MovieCard';
 import { MovieSkeleton } from '@/components/common/SkeletonLoader/MovieSkeleton/MovieSkeleton';
 import { ArrowIcon } from '@/components/common/Icons/ArrowIcon';
 
-import './Captivating.scss';
+import './Movies.scss';
 
-export const CaptivatingList = ({ title }: { title: string }) => {
+interface MoviesProps {
+	type: 'movie' | 'tv';
+	title: string;
+	genres: string[];
+}
+
+export const Movies = ({ title: cardHeader, genres, type }: MoviesProps) => {
 	const SKELETON_LENGTH = 10;
 	const scrollRef = useRef<HTMLDivElement>(null);
 
 	const { data: randomMoviesData, isSuccess: isSuccessRandomMovies } =
-		useMovieList({
-			genres: [
-				TMDB_GENRE_CONFIG.DRAMA,
-				TMDB_GENRE_CONFIG.SCIENCE_FICTION,
-			],
+		useContent({
+			type,
+			genres: [...genres],
 		});
 
 	const scrollLeft = () =>
@@ -38,18 +41,25 @@ export const CaptivatingList = ({ title }: { title: string }) => {
 				</div>
 			) : (
 				<div className='card'>
-					<h2 className='card__title'>{title}</h2>
+					<h2 className='card__title'>{cardHeader}</h2>
 					<div className='card__list' ref={scrollRef}>
 						{randomMoviesData?.results.map(
-							({ id, title, backdrop_path }: MovieResponse) => (
-								<div key={id}>
-									<MovieCard
-										id={id}
-										title={title}
-										backdrop_path={backdrop_path}
-									/>
-								</div>
-							)
+							(item: MovieResponse) => {
+								const { id, backdrop_path } = item;
+								const title =
+									item.original_name ?? item.original_title;
+
+								return (
+									<div key={id}>
+										<MovieCard
+											id={id}
+											type={type}
+											title={title}
+											backdrop_path={backdrop_path}
+										/>
+									</div>
+								);
+							}
 						)}
 					</div>
 					<button

@@ -1,0 +1,8 @@
+@use '@/scss/globals' as g;
+@use '@/scss/util' as u;
+
+.main {
+	display: flex;
+	flex-direction: column;
+	gap: u.rem(70);
+}
