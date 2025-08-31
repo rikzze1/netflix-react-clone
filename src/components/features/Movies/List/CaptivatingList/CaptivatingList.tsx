@@ -1,5 +1,5 @@
 import type { MovieResponse } from '@/types/types';
-import { useRandomMovies } from '@/services/tmdb/queries/random-movies.query';
+import { useMovieList } from '@/services/tmdb/queries/movie-list';
 
 import { MovieCard } from '@/components/common/Card/MovieCard/MovieCard';
 
@@ -7,28 +7,30 @@ import './Captivating.scss';
 
 export const CaptivatingList = () => {
 	const { data: randomMoviesData, isSuccess: isSuccessRandomMovies } =
-		useRandomMovies();
+		useMovieList();
 
 	return (
-		<div className='card'>
-			<h2 className='card__title'>So Completely Captivating</h2>
-			<div className='card__list'>
-				{isSuccessRandomMovies && randomMoviesData ? (
-					randomMoviesData?.results.map(
-						({ id, title, backdrop_path }: MovieResponse) => (
-							<div key={id}>
-								<MovieCard
-									id={id}
-									title={title}
-									backdrop_path={backdrop_path}
-								/>
-							</div>
-						)
-					)
-				) : (
-					<div>loading</div>
-				)}
-			</div>
-		</div>
+		<>
+			{isSuccessRandomMovies && randomMoviesData ? (
+				<div className='card'>
+					<h2 className='card__title'>So Completely Captivating</h2>
+					<div className='card__list'>
+						{randomMoviesData?.results.map(
+							({ id, title, backdrop_path }: MovieResponse) => (
+								<div key={id}>
+									<MovieCard
+										id={id}
+										title={title}
+										backdrop_path={backdrop_path}
+									/>
+								</div>
+							)
+						)}
+					</div>
+				</div>
+			) : (
+				<div>loading</div>
+			)}
+		</>
 	);
 };

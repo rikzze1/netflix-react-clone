@@ -5,7 +5,7 @@ import { getTmdbImageUrl } from '@/util/getTmdbImageUrl';
 import { getYoutubeEmbedUrl } from '@/util/getYoutubeEmbedUrl';
 import { useMovieInfoStore } from '@/stores/header.store';
 
-import { useRandomMovies } from '@/services/tmdb/queries/random-movies.query';
+import { useMovieList } from '@/services/tmdb/queries/movie-list';
 import { useMovieLogo } from '@/services/tmdb/queries/movie-logo.query';
 import { useMovieTrailer } from '@/services/tmdb/queries/movie-trailer';
 
@@ -16,9 +16,10 @@ import { NotMutedIcon } from '@/components/common/Icons/NotMutedIcon';
 import { MutedIcon } from '@/components/common/Icons/MutedIcon';
 
 import './Billboard.scss';
+import { TMDB_GENRE_CONFIG } from '@/services/tmdb/constants';
 
 const MOVIE_BILLBOARD_INDEX = 5;
-const SEC_TO_END_VID = 60000;
+const SEC_TO_END_VID = 30000;
 const SEC_DELAY_TO_PLAY_VID = 3000;
 
 const STATES = {
@@ -143,8 +144,9 @@ export const Billboard = () => {
 
 	const { setTrackTrailerState: setGlobalTrailerState } = useMovieInfoStore();
 
-	const { data: movieData, isSuccess: isFetchMovieSuccess } =
-		useRandomMovies();
+	const { data: movieData, isSuccess: isFetchMovieSuccess } = useMovieList({
+		genres: [TMDB_GENRE_CONFIG.ACTION, TMDB_GENRE_CONFIG.CRIME],
+	});
 
 	const { id, title, backdrop_path, overview }: MovieResponse =
 		movieData?.results[MOVIE_BILLBOARD_INDEX] ?? {};

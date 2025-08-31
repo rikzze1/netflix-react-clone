@@ -1,27 +1,25 @@
 import { useQuery } from '@tanstack/react-query';
 import { instance } from '@/services/axios/instance';
-import { TMDB_GENRE_CONFIG } from '@/services/tmdb/constants';
 
-export function useRandomMovies() {
+export function useMovieList({
+	genres = [],
+}: { genres?: (string | number)[] } = {}) {
 	const currentYear = new Date().getFullYear();
 	const MIN_YEAR = 1997;
 
 	const randomYear =
 		Math.floor(Math.random() * (currentYear - MIN_YEAR)) + MIN_YEAR;
 
-	const SCIFI = TMDB_GENRE_CONFIG.SCIENCE_FICTION;
-	const ADVENTURE = TMDB_GENRE_CONFIG.ADVENTURE;
-
-	const genres = [SCIFI, ADVENTURE].filter(Boolean).join(',');
+	const genreString = genres.length > 0 ? genres.join(',') : undefined;
 
 	return useQuery({
-		queryKey: ['random-movies'],
+		queryKey: ['random-movies', genres],
 		queryFn: async () => {
 			const response = await instance.get('/3/discover/movie', {
 				params: {
 					primary_release_year: randomYear,
 					sort_by: 'vote_count.desc',
-					with_genres: genres,
+					...(genreString && { with_genres: genreString }),
 				},
 			});
 			return response.data;
