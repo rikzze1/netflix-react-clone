@@ -1,5 +1,5 @@
-@use '../../../scss/globals/colors' as c;
-@use '../../../scss/util/functions' as f;
+@use '@/scss/globals/colors' as c;
+@use '@/scss/util/functions' as f;
 
 .cover {
 	background-color: c.$clr-black;

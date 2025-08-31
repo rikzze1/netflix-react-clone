@@ -145,7 +145,7 @@ export const Billboard = () => {
 	const { setTrackTrailerState: setGlobalTrailerState } = useMovieInfoStore();
 
 	const { data: movieData, isSuccess: isFetchMovieSuccess } = useMovieList({
-		genres: [TMDB_GENRE_CONFIG.ACTION, TMDB_GENRE_CONFIG.CRIME],
+		genres: [TMDB_GENRE_CONFIG.SCIENCE_FICTION, TMDB_GENRE_CONFIG.THRILLER],
 	});
 
 	const { id, title, backdrop_path, overview }: MovieResponse =

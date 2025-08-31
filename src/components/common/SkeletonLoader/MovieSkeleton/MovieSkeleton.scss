@@ -1,0 +1,20 @@
+@use '@/scss/globals' as g;
+@use '@/scss/util' as u;
+
+.skeleton {
+	display: flex;
+	gap: u.rem(16);
+	width: 100%;
+	height: u.rem(157);
+	overflow-x: auto;
+	background-color: blue;
+	border-radius: u.rem(8);
+
+	&__card {
+		width: 100%;
+		height: u.rem(157);
+		background-color: pink;
+		min-width: u.rem(280);
+		border-radius: u.rem(8);
+	}
+}
