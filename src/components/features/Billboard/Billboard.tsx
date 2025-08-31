@@ -3,6 +3,7 @@ import { useEffect, useState, useRef, type CSSProperties } from 'react';
 import type { MovieResponse, TmdbImage } from '@/types/types';
 import { getTmdbImageUrl } from '@/util/getTmdbImageUrl';
 import { getYoutubeEmbedUrl } from '@/util/getYoutubeEmbedUrl';
+import { useMovieInfoStore } from '@/stores/header.store';
 
 import { useRandomMovies } from '@/services/tmdb/queries/random-movies.query';
 import { useMovieLogo } from '@/services/tmdb/queries/movie-logo.query';
@@ -17,8 +18,8 @@ import { MutedIcon } from '@/components/common/Icons/MutedIcon';
 import './Billboard.scss';
 
 const MOVIE_BILLBOARD_INDEX = 5;
-const SEC_TO_END_VID = 40000;
-const SEC_DELAY_TO_PLAY_VID = 2000;
+const SEC_TO_END_VID = 60000;
+const SEC_DELAY_TO_PLAY_VID = 3000;
 
 const STATES = {
 	INITIAL: 'initial',
@@ -140,8 +141,11 @@ export const Billboard = () => {
 		isMuted: true,
 	});
 
+	const { setTrackTrailerState: setGlobalTrailerState } = useMovieInfoStore();
+
 	const { data: movieData, isSuccess: isFetchMovieSuccess } =
 		useRandomMovies();
+
 	const { id, title, backdrop_path, overview }: MovieResponse =
 		movieData?.results[MOVIE_BILLBOARD_INDEX] ?? {};
 
@@ -174,23 +178,31 @@ export const Billboard = () => {
 
 	useEffect(() => {
 		setMovieInfo(prev => ({ ...prev, isTrailerPlayed: false }));
+		setGlobalTrailerState(false);
+
 		const timeId = setTimeout(() => {
 			setMovieInfo(prev => ({ ...prev, isTrailerPlayed: true }));
+			setGlobalTrailerState(true);
 		}, SEC_DELAY_TO_PLAY_VID);
 
 		return () => clearTimeout(timeId);
-	}, []);
+	}, [setGlobalTrailerState]);
 
 	useEffect(() => {
 		if (movieInfo.isTrailerPlayed && !movieInfo.isTrailerEnded) {
 			const timer = setTimeout(() => {
 				setMovieInfo(prev => ({ ...prev, isTrailerEnded: true }));
+				setGlobalTrailerState(false);
 				setTractMovieState(STATES.INITIAL);
 			}, SEC_TO_END_VID);
 
 			return () => clearTimeout(timer);
 		}
-	}, [movieInfo.isTrailerEnded, movieInfo.isTrailerPlayed]);
+	}, [
+		movieInfo.isTrailerEnded,
+		movieInfo.isTrailerPlayed,
+		setGlobalTrailerState,
+	]);
 
 	const toggleMute = () => {
 		setMovieInfo(prev => ({ ...prev, isMuted: !movieInfo.isMuted }));
@@ -205,11 +217,13 @@ export const Billboard = () => {
 			isTrailerPlayed: true,
 			isTrailerEnded: false,
 		}));
+		setGlobalTrailerState(true);
 		setTractMovieState(STATES.INITIAL);
 	};
 
 	const shouldShowTrailer =
 		movieInfo.isTrailerPlayed && !movieInfo.isTrailerEnded;
+
 	const backdropStyle = {
 		'--billboard-backdrop': backdrop_path
 			? `url("${getTmdbImageUrl(backdrop_path, 'ORIGINAL')}")`

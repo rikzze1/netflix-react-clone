@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
+import { useMovieInfoStore } from '@/stores/header.store';
 
 import netflixLogo from '@/assets/logo/Netflix_Logo_RGB.png';
 import userProfile from '@/assets/profile/user.png';
@@ -38,6 +39,8 @@ export const Header = () => {
 	const [isSearchClick, setIsSearchClick] = useState(false);
 	const [isProfileClick, setIsProfileClick] = useState(false);
 	const [isHomeNavClick, setIsHomeNavClick] = useState(false);
+
+	const { trackTrailerState } = useMovieInfoStore();
 
 	const menu: Menu[] = [
 		{
@@ -158,7 +161,9 @@ export const Header = () => {
 	});
 
 	return (
-		<nav className='header'>
+		<nav
+			className={`header ${trackTrailerState ? 'header--trailer-playing' : ''}`}
+		>
 			<div className='header__left-menu'>
 				<button className='header__logo' onClick={returnToLogin}>
 					<img src={netflixLogo} alt='Netflix Logo' />

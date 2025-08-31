@@ -4,5 +4,5 @@ interface YoutubeEmbed {
 }
 
 export const getYoutubeEmbedUrl = ({ key, mute }: YoutubeEmbed) => {
-	return `https://www.youtube.com/embed/${key}?autoplay=1&mute=${mute}&controls=0&modestbranding=1&rel=0&showinfo=0`;
+	return `https://www.youtube.com/embed/${key}?autoplay=1&mute=${mute}&controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1&fs=1`;
 };

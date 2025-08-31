@@ -10,8 +10,9 @@ export function useRandomMovies() {
 		Math.floor(Math.random() * (currentYear - MIN_YEAR)) + MIN_YEAR;
 
 	const SCIFI = TMDB_GENRE_CONFIG.SCIENCE_FICTION;
-	const CRIME = TMDB_GENRE_CONFIG.THRILLER;
-	const genres = [SCIFI, CRIME].filter(Boolean).join(',');
+	const ADVENTURE = TMDB_GENRE_CONFIG.ADVENTURE;
+
+	const genres = [SCIFI, ADVENTURE].filter(Boolean).join(',');
 
 	return useQuery({
 		queryKey: ['random-movies'],

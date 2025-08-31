@@ -4,14 +4,19 @@
 .header {
 	display: flex;
 	justify-content: space-between;
-	// background-color: g.$clr-black;
+	background-color: transparent;
 	padding-top: 0.5rem;
+	transition: background-color 0.5s ease;
 
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	z-index: 100;
+
+	&.header--trailer-playing {
+		background-color: g.$clr-black;
+	}
 
 	&__logo {
 		background: none;
@@ -368,7 +373,6 @@
 	}
 
 	@include u.breakpoint-down(small) {
-		margin-inline: 1rem;
 		padding: 0.5rem 0;
 		display: grid;
 		grid-template-columns: 1fr auto;
