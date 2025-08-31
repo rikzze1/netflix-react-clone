@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, type CSSProperties } from 'react';
 
-import type { MovieResponse } from '@/types/types';
+import type { MovieResponse, TmdbImage } from '@/types/types';
 import { getTmdbImageUrl } from '@/util/getTmdbImageUrl';
 import { getYoutubeEmbedUrl } from '@/util/getYoutubeEmbedUrl';
 
@@ -16,13 +16,123 @@ import { MutedIcon } from '@/components/common/Icons/MutedIcon';
 
 import './Billboard.scss';
 
+const MOVIE_BILLBOARD_INDEX = 5;
+const SEC_TO_END_VID = 40000;
+const SEC_DELAY_TO_PLAY_VID = 2000;
+
+const STATES = {
+	INITIAL: 'initial',
+	SMALL: 'small',
+} as const;
+
+const BillboardTitle = ({
+	isFetchMovieLogo,
+	movieLogo,
+	logo,
+	title,
+	movieTitleRef,
+}: {
+	isFetchMovieLogo: boolean;
+	movieLogo: TmdbImage;
+	logo: string;
+	title?: string;
+	movieTitleRef: React.RefObject<HTMLImageElement | null>;
+}) => {
+	if (isFetchMovieLogo && movieLogo) {
+		return (
+			<img
+				className="billboard__title"
+				data-state="initial"
+				src={getTmdbImageUrl(logo, 'MEDIUM')}
+				alt={title}
+				ref={movieTitleRef}
+			/>
+		);
+	}
+
+	return <h3 className="billboard__fallback--title">{title}</h3>;
+};
+
+const BillboardDescription = ({
+	overview,
+	movieDescriptionRef,
+}: {
+	overview?: string;
+	movieDescriptionRef: React.RefObject<HTMLParagraphElement | null>;
+}) => {
+	if (!overview) return null;
+
+	return (
+		<p
+			className="billboard__description"
+			data-state="initial"
+			ref={movieDescriptionRef}
+		>
+			{overview}
+		</p>
+	);
+};
+
+const MuteButton = ({
+	isMuted,
+	onToggleMute,
+}: {
+	isMuted: boolean;
+	onToggleMute: () => void;
+}) => (
+	<button onClick={onToggleMute}>
+		{isMuted ? (
+			<MutedIcon color="white" width="20" height="20" />
+		) : (
+			<NotMutedIcon color="white" width="20" height="20" />
+		)}
+	</button>
+);
+
+const ReplayButton = ({ onToggleReplay }: { onToggleReplay: () => void }) => (
+	<button onClick={onToggleReplay}>
+		<ReplayIcon color="white" width="20" height="20" />
+	</button>
+);
+
+const RightControls = ({
+	movieInfo,
+	onToggleMute,
+	onToggleReplay,
+}: {
+	movieInfo: {
+		isTrailerPlayed: boolean;
+		isTrailerEnded: boolean;
+		isMuted: boolean;
+	};
+	onToggleMute: () => void;
+	onToggleReplay: () => void;
+}) => {
+	const showMuteButton =
+		movieInfo.isTrailerPlayed && !movieInfo.isTrailerEnded;
+	const showReplayButton = movieInfo.isTrailerEnded;
+
+	return (
+		<>
+			{showMuteButton && (
+				<MuteButton
+					isMuted={movieInfo.isMuted}
+					onToggleMute={onToggleMute}
+				/>
+			)}
+			{showReplayButton && (
+				<ReplayButton onToggleReplay={onToggleReplay} />
+			)}
+			<div className="rating">
+				<span>16+</span>
+			</div>
+		</>
+	);
+};
+
 export const Billboard = () => {
 	const movieTitleRef = useRef<HTMLImageElement>(null);
 	const movieDescriptionRef = useRef<HTMLParagraphElement>(null);
-
-	const MOVIE_BILLBOARD_INDEX = 5;
-	const SEC_TO_END_VID = 40000;
-	const SEC_DELAY_TO_PLAY_VID = 2000;
 
 	const [movieInfo, setMovieInfo] = useState({
 		isTrailerPlayed: false,
@@ -30,14 +140,8 @@ export const Billboard = () => {
 		isMuted: true,
 	});
 
-	const state = {
-		INITIAL: 'initial',
-		SMALL: 'small',
-	};
-
 	const { data: movieData, isSuccess: isFetchMovieSuccess } =
 		useRandomMovies();
-
 	const { id, title, backdrop_path, overview }: MovieResponse =
 		movieData?.results[MOVIE_BILLBOARD_INDEX] ?? {};
 
@@ -48,7 +152,9 @@ export const Billboard = () => {
 	const logo = movieLogo?.logos[0]?.file_path ?? '';
 
 	const { data: movieTrailer, isSuccess: isFetchMovieTrailer } =
-		useMovieTrailer({ key: isFetchMovieSuccess ? String(id) : '' });
+		useMovieTrailer({
+			key: isFetchMovieSuccess ? String(id) : '',
+		});
 
 	const trailer = movieTrailer?.results?.find(
 		(video: { type: string }) => video.type === 'Trailer'
@@ -67,43 +173,29 @@ export const Billboard = () => {
 	};
 
 	useEffect(() => {
-		setMovieInfo(prev => ({
-			...prev,
-			isTrailerPlayed: false,
-		}));
+		setMovieInfo(prev => ({ ...prev, isTrailerPlayed: false }));
 		const timeId = setTimeout(() => {
-			setMovieInfo(prev => ({
-				...prev,
-				isTrailerPlayed: true,
-			}));
-			return () => {
-				clearTimeout(timeId);
-			};
+			setMovieInfo(prev => ({ ...prev, isTrailerPlayed: true }));
 		}, SEC_DELAY_TO_PLAY_VID);
+
+		return () => clearTimeout(timeId);
 	}, []);
 
 	useEffect(() => {
 		if (movieInfo.isTrailerPlayed && !movieInfo.isTrailerEnded) {
 			const timer = setTimeout(() => {
-				setMovieInfo(prev => ({
-					...prev,
-					isTrailerEnded: true,
-				}));
-				setTractMovieState(state.INITIAL);
+				setMovieInfo(prev => ({ ...prev, isTrailerEnded: true }));
+				setTractMovieState(STATES.INITIAL);
 			}, SEC_TO_END_VID);
 
 			return () => clearTimeout(timer);
 		}
-	}, [movieInfo.isTrailerEnded, movieInfo.isTrailerPlayed, state.INITIAL]);
+	}, [movieInfo.isTrailerEnded, movieInfo.isTrailerPlayed]);
 
 	const toggleMute = () => {
-		setMovieInfo(prev => ({
-			...prev,
-			isMuted: !movieInfo.isMuted,
-		}));
-
+		setMovieInfo(prev => ({ ...prev, isMuted: !movieInfo.isMuted }));
 		if (movieInfo.isMuted) {
-			setTractMovieState(state.SMALL);
+			setTractMovieState(STATES.SMALL);
 		}
 	};
 
@@ -113,108 +205,67 @@ export const Billboard = () => {
 			isTrailerPlayed: true,
 			isTrailerEnded: false,
 		}));
-
-		setTractMovieState(state.INITIAL);
+		setTractMovieState(STATES.INITIAL);
 	};
 
-	if (isFetchMovieSuccess && movieData)
-		return (
-			<div
-				className="billboard"
-				style={
-					{
-						'--billboard-backdrop': backdrop_path
-							? `url("${getTmdbImageUrl(backdrop_path, 'ORIGINAL')}")`
-							: 'none',
-					} as CSSProperties
-				}
-			>
-				{movieInfo.isTrailerPlayed && !movieInfo.isTrailerEnded && (
-					<iframe
-						width="100%"
-						height="100%"
-						title="trailer"
-						frameBorder="0"
-						allow="autoplay; encrypted-media"
-						src={isFetchMovieTrailer ? url : ''}
-					/>
-				)}
-				<div className="billboard__info">
-					{isFetchMovieLogo && movieLogo ? (
-						<img
-							className="billboard__title"
-							data-state="initial"
-							src={getTmdbImageUrl(logo, 'MEDIUM')}
-							alt={title}
-							ref={movieTitleRef}
-						/>
-					) : (
-						<h3 className="billboard__fallback--title">{title}</h3>
-					)}
+	const shouldShowTrailer =
+		movieInfo.isTrailerPlayed && !movieInfo.isTrailerEnded;
+	const backdropStyle = {
+		'--billboard-backdrop': backdrop_path
+			? `url("${getTmdbImageUrl(backdrop_path, 'ORIGINAL')}")`
+			: 'none',
+	} as CSSProperties;
 
-					{overview && (
-						<p
-							className="billboard__description"
-							data-state="initial"
-							ref={movieDescriptionRef}
-						>
-							{overview}
-						</p>
-					)}
-					<div className="billboard__buttons">
-						<div className="left-items">
-							<button>
-								<PlayIcon
-									color="black"
-									width="24"
-									height="24"
-								/>
-								Play
-							</button>
-							<button>
-								<MoreInfoIcon
-									color="white"
-									width="24"
-									height="24"
-								/>
-								More Info
-							</button>
-						</div>
-						<div className="right-items">
-							{movieInfo.isTrailerPlayed &&
-							!movieInfo.isTrailerEnded ? (
-								<button onClick={toggleMute}>
-									{movieInfo.isMuted ? (
-										<MutedIcon
-											color="white"
-											width="20"
-											height="20"
-										/>
-									) : (
-										<NotMutedIcon
-											color="white"
-											width="20"
-											height="20"
-										/>
-									)}
-								</button>
-							) : (
-								movieInfo.isTrailerEnded && (
-									<button onClick={toggleReplay}>
-										<ReplayIcon
-											color="white"
-											width="20"
-											height="20"
-										/>
-									</button>
-								)
-							)}
-							<div className="rating">
-								<span>16+</span>
-							</div>
-						</div>
+	if (!isFetchMovieSuccess || !movieData) return null;
+
+	return (
+		<div className="billboard" style={backdropStyle}>
+			{shouldShowTrailer && (
+				<iframe
+					width="100%"
+					height="100%"
+					title="trailer"
+					frameBorder="0"
+					allow="autoplay; encrypted-media"
+					src={isFetchMovieTrailer ? url : ''}
+				/>
+			)}
+			<div className="billboard__info">
+				<BillboardTitle
+					isFetchMovieLogo={isFetchMovieLogo}
+					movieLogo={movieLogo}
+					logo={logo}
+					title={title}
+					movieTitleRef={movieTitleRef}
+				/>
+				<BillboardDescription
+					overview={overview}
+					movieDescriptionRef={movieDescriptionRef}
+				/>
+				<div className="billboard__buttons">
+					<div className="left-items">
+						<button>
+							<PlayIcon color="black" width="24" height="24" />
+							Play
+						</button>
+						<button>
+							<MoreInfoIcon
+								color="white"
+								width="24"
+								height="24"
+							/>
+							More Info
+						</button>
+					</div>
+					<div className="right-items">
+						<RightControls
+							movieInfo={movieInfo}
+							onToggleMute={toggleMute}
+							onToggleReplay={toggleReplay}
+						/>
 					</div>
 				</div>
 			</div>
-		);
+		</div>
+	);
 };
