@@ -23,7 +23,7 @@ export const MovieCard = ({ id = 8, title, backdrop_path }: MovieResponse) => {
 
 	return (
 		<div
-			className="card__poster"
+			className='card__poster'
 			ref={intersectionRef}
 			style={
 				{
@@ -48,7 +48,7 @@ export const MovieCard = ({ id = 8, title, backdrop_path }: MovieResponse) => {
 				}
 			>
 				{!logo && isIntersecting && (
-					<span className="logo-title">{title}</span>
+					<span className='logo-title'>{title}</span>
 				)}
 			</div>
 		</div>

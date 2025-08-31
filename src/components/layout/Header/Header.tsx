@@ -87,25 +87,25 @@ export const Header = () => {
 
 	const settings: Settings[] = [
 		{
-			icon: <ManageProfileIcon color="white" height="20" width="20" />,
+			icon: <ManageProfileIcon color='white' height='20' width='20' />,
 			label: 'Manage Profiles',
 		},
 		{
 			icon: (
 				<TransferProfileIcon
-					color="whitesmoke"
-					height="20"
-					width="20"
+					color='whitesmoke'
+					height='20'
+					width='20'
 				/>
 			),
 			label: 'Transfer Profile',
 		},
 		{
-			icon: <AccountIcon color="white" height="20" width="20" />,
+			icon: <AccountIcon color='white' height='20' width='20' />,
 			label: 'Account',
 		},
 		{
-			icon: <HelpCenterIcon color="white" height="20" width="20" />,
+			icon: <HelpCenterIcon color='white' height='20' width='20' />,
 			label: 'Help Center',
 		},
 	];
@@ -158,25 +158,25 @@ export const Header = () => {
 	});
 
 	return (
-		<nav className="header">
-			<div className="header__left-menu">
-				<button className="header__logo" onClick={returnToLogin}>
-					<img src={netflixLogo} alt="Netflix Logo" />
+		<nav className='header'>
+			<div className='header__left-menu'>
+				<button className='header__logo' onClick={returnToLogin}>
+					<img src={netflixLogo} alt='Netflix Logo' />
 				</button>
-				<ul className="header__nav-list">
+				<ul className='header__nav-list'>
 					{menu.map((item, index) => {
 						return <li key={index}>{item.label}</li>;
 					})}
 				</ul>
 				<div
-					className="header__nav-mobile"
+					className='header__nav-mobile'
 					ref={homeRef}
 					onClick={homeSettingsToggle}
 				>
 					<span>Browse</span>
 					{isHomeNavClick && (
-						<div className="nav">
-							<span className="mobile-caret"></span>
+						<div className='nav'>
+							<span className='mobile-caret'></span>
 							<ul>
 								{menu.map((item, index) => (
 									<li key={index}>{item.label}</li>
@@ -186,79 +186,79 @@ export const Header = () => {
 					)}
 				</div>
 			</div>
-			<div className="header__right-menu">
-				<div className="item">
+			<div className='header__right-menu'>
+				<div className='item'>
 					{isSearchClick ? (
-						<div id="search-input" ref={searchRef}>
+						<div id='search-input' ref={searchRef}>
 							<button onClick={searchToggle}>
 								<SearchIcon
-									color="#fefefe"
-									height="22"
-									width="22"
+									color='#fefefe'
+									height='22'
+									width='22'
 								/>
 							</button>
 							<input
-								type="text"
-								placeholder="Titles, people, genres"
+								type='text'
+								placeholder='Titles, people, genres'
 							/>
 						</div>
 					) : (
 						<button onClick={searchToggle}>
 							<SearchIcon
-								color="#fefefe"
-								height="22"
-								width="22"
+								color='#fefefe'
+								height='22'
+								width='22'
 							/>
 						</button>
 					)}
 				</div>
-				<a className="item--kids" href="/">
+				<a className='item--kids' href='/'>
 					Kids
 				</a>
-				<div className="item">
-					<NotificationIcon color="#fefefe" height="22" width="22" />
+				<div className='item'>
+					<NotificationIcon color='#fefefe' height='22' width='22' />
 				</div>
-				<div className="item" ref={profileRef}>
+				<div className='item' ref={profileRef}>
 					<button onClick={profileSettingsToggle}>
 						<img
 							src={userProfile}
-							alt="user"
+							alt='user'
 							style={{ borderRadius: '4px' }}
 						/>
 					</button>
 					<span
-						className="caret-down"
+						className='caret-down'
 						style={{ color: 'white' }}
 					></span>
 					{isProfileClick && (
-						<div className="item__settings">
-							<span className="profile__caret"></span>
-							<div className="profiles">
+						<div className='item__settings'>
+							<span className='profile__caret'></span>
+							<div className='profiles'>
 								{profiles.map((item, index) => (
-									<div key={index} className="profiles__item">
+									<div key={index} className='profiles__item'>
 										<img
 											src={item.route}
 											alt={item.label}
 										/>
 										<span>
-											<a href="/browse">{item.label}</a>
+											<a href='/browse'>{item.label}</a>
 										</span>
 									</div>
 								))}
 								{settings.map((item, index) => (
 									<div
 										key={index}
-										className="profile__settings"
+										className='profile__settings'
 									>
 										{item.icon}
 										<span>
-											<a href="/browse">{item.label}</a>
+											<a href='/browse'>{item.label}</a>
 										</span>
 									</div>
 								))}
-								<div className="separator"></div>
-								<div className="signout">
-									<a href="/browse">Sign out of Netflix</a>
+								<div className='separator'></div>
+								<div className='signout'>
+									<a href='/browse'>Sign out of Netflix</a>
 								</div>
 							</div>
 						</div>

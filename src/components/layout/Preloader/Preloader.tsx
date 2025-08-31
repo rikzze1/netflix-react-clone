@@ -18,9 +18,9 @@ export const Preloader = () => {
 	}, [navigate]);
 
 	return (
-		<div className="cover">
-			<img id="cover__image" src={netflixLogo} alt="netflix" />
-			<h1 className="cover__header">Clone</h1>
+		<div className='cover'>
+			<img id='cover__image' src={netflixLogo} alt='netflix' />
+			<h1 className='cover__header'>Clone</h1>
 		</div>
 	);
 };

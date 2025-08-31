@@ -10,9 +10,9 @@ export const CaptivatingList = () => {
 		useRandomMovies();
 
 	return (
-		<div className="card">
-			<h2 className="card__title">So Completely Captivating</h2>
-			<div className="card__list">
+		<div className='card'>
+			<h2 className='card__title'>So Completely Captivating</h2>
+			<div className='card__list'>
 				{isSuccessRandomMovies && randomMoviesData ? (
 					randomMoviesData?.results.map(
 						({ id, title, backdrop_path }: MovieResponse) => (

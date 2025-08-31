@@ -41,8 +41,8 @@ const BillboardTitle = ({
 	if (isFetchMovieLogo && movieLogo) {
 		return (
 			<img
-				className="billboard__title"
-				data-state="initial"
+				className='billboard__title'
+				data-state='initial'
 				src={getTmdbImageUrl(logo, 'MEDIUM')}
 				alt={title}
 				ref={movieTitleRef}
@@ -50,7 +50,7 @@ const BillboardTitle = ({
 		);
 	}
 
-	return <h3 className="billboard__fallback--title">{title}</h3>;
+	return <h3 className='billboard__fallback--title'>{title}</h3>;
 };
 
 const BillboardDescription = ({
@@ -64,8 +64,8 @@ const BillboardDescription = ({
 
 	return (
 		<p
-			className="billboard__description"
-			data-state="initial"
+			className='billboard__description'
+			data-state='initial'
 			ref={movieDescriptionRef}
 		>
 			{overview}
@@ -82,16 +82,16 @@ const MuteButton = ({
 }) => (
 	<button onClick={onToggleMute}>
 		{isMuted ? (
-			<MutedIcon color="white" width="20" height="20" />
+			<MutedIcon color='white' width='20' height='20' />
 		) : (
-			<NotMutedIcon color="white" width="20" height="20" />
+			<NotMutedIcon color='white' width='20' height='20' />
 		)}
 	</button>
 );
 
 const ReplayButton = ({ onToggleReplay }: { onToggleReplay: () => void }) => (
 	<button onClick={onToggleReplay}>
-		<ReplayIcon color="white" width="20" height="20" />
+		<ReplayIcon color='white' width='20' height='20' />
 	</button>
 );
 
@@ -123,7 +123,7 @@ const RightControls = ({
 			{showReplayButton && (
 				<ReplayButton onToggleReplay={onToggleReplay} />
 			)}
-			<div className="rating">
+			<div className='rating'>
 				<span>16+</span>
 			</div>
 		</>
@@ -219,18 +219,18 @@ export const Billboard = () => {
 	if (!isFetchMovieSuccess || !movieData) return null;
 
 	return (
-		<div className="billboard" style={backdropStyle}>
+		<div className='billboard' style={backdropStyle}>
 			{shouldShowTrailer && (
 				<iframe
-					width="100%"
-					height="100%"
-					title="trailer"
-					frameBorder="0"
-					allow="autoplay; encrypted-media"
+					width='100%'
+					height='100%'
+					title='trailer'
+					frameBorder='0'
+					allow='autoplay; encrypted-media'
 					src={isFetchMovieTrailer ? url : ''}
 				/>
 			)}
-			<div className="billboard__info">
+			<div className='billboard__info'>
 				<BillboardTitle
 					isFetchMovieLogo={isFetchMovieLogo}
 					movieLogo={movieLogo}
@@ -242,22 +242,22 @@ export const Billboard = () => {
 					overview={overview}
 					movieDescriptionRef={movieDescriptionRef}
 				/>
-				<div className="billboard__buttons">
-					<div className="left-items">
+				<div className='billboard__buttons'>
+					<div className='left-items'>
 						<button>
-							<PlayIcon color="black" width="24" height="24" />
+							<PlayIcon color='black' width='24' height='24' />
 							Play
 						</button>
 						<button>
 							<MoreInfoIcon
-								color="white"
-								width="24"
-								height="24"
+								color='white'
+								width='24'
+								height='24'
 							/>
 							More Info
 						</button>
 					</div>
-					<div className="right-items">
+					<div className='right-items'>
 						<RightControls
 							movieInfo={movieInfo}
 							onToggleMute={toggleMute}

@@ -6,13 +6,13 @@ import './Home.scss';
 
 const Home = () => {
 	return (
-		<div className="container">
+		<div className='container'>
 			<Header />
-			<main className="container__main">
-				<div className="main__billboard">
+			<main className='container__main'>
+				<div className='main__billboard'>
 					<Billboard />
 				</div>
-				<div className="main__movies">
+				<div className='main__movies'>
 					<Movies />
 				</div>
 			</main>

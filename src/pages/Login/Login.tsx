@@ -42,18 +42,18 @@ const Login = () => {
 	const redirectToHome = (route: string) => navigate(route);
 
 	return (
-		<div className="login">
-			<h1 className="login__header">Who's watching?</h1>
-			<div className="login__profile">
+		<div className='login'>
+			<h1 className='login__header'>Who's watching?</h1>
+			<div className='login__profile'>
 				{profiles.map((item, index) => {
 					return (
 						<button
 							onClick={() => redirectToHome(item.route)}
-							className="profile"
+							className='profile'
 							key={index}
 						>
 							<img
-								loading="lazy"
+								loading='lazy'
 								src={item.path}
 								alt={item.label}
 							/>
@@ -61,14 +61,14 @@ const Login = () => {
 						</button>
 					);
 				})}
-				<div className="profile--add">
-					<div className="round-container">
+				<div className='profile--add'>
+					<div className='round-container'>
 						<span></span>
 					</div>
 					<p>Add Profile</p>
 				</div>
 			</div>
-			<button className="button-profiles">Manage Profiles</button>
+			<button className='button-profiles'>Manage Profiles</button>
 		</div>
 	);
 };
