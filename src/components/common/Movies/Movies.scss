@@ -43,7 +43,7 @@
 			z-index: 60;
 			padding: 0 u.rem(10);
 			background-color: transparent;
-			top: u.rem(50);
+			top: u.rem(45);
 			opacity: 0;
 			border: none;
 
@@ -61,6 +61,12 @@
 
 		&--right-caret {
 			right: 0;
+		}
+
+		&--left-caret-toprank,
+		&--right-caret-toprank {
+			height: u.rem(220); // Match the taller poster height
+			top: u.rem(65); // Adjust vertical position for taller cards
 		}
 	}
 

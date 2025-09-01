@@ -9,6 +9,7 @@ import { MovieSkeleton } from '@/components/common/SkeletonLoader/MovieSkeleton/
 import { ArrowIcon } from '@/components/common/Icons/ArrowIcon';
 
 import './Movies.scss';
+import clsx from 'clsx';
 
 interface MoviesProps {
 	type: 'movie' | 'tv';
@@ -80,13 +81,19 @@ export const Movies = ({
 					</div>
 					<button
 						onClick={scrollLeft}
-						className='card__list--left-caret'
+						className={clsx(
+							'card__list--left-caret',
+							isTopRank && 'card__list--left-caret-toprank'
+						)}
 					>
 						<ArrowIcon color='white' height='22' width='22' />
 					</button>
 					<button
 						onClick={scrollRight}
-						className='card__list--right-caret'
+						className={clsx(
+							'card__list--right-caret',
+							isTopRank && 'card__list--right-caret-toprank'
+						)}
 					>
 						<ArrowIcon color='white' height='22' width='22' />
 					</button>
