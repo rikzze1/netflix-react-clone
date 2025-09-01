@@ -163,6 +163,22 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	gap: u.rem(4);
+
+	&__item {
+		svg {
+			width: u.rem(145);
+			height: u.rem(206);
+
+			@include u.breakpoint-down(medium) {
+				width: u.rem(100);
+				height: u.rem(140);
+			}
+
+			@include u.breakpoint-down(small) {
+				width: u.rem(70);
+				height: u.rem(100);
+			}
+		}
+	}
 }
