@@ -54,22 +54,29 @@ export const Movies = ({
 				<div className='card'>
 					<h2 className='card__title'>{cardHeader}</h2>
 					<div className='card__list' ref={scrollRef}>
-						{actualData?.results.map((item: MovieResponse) => {
-							const { id, backdrop_path } = item;
-							const title =
-								item.original_name ?? item.original_title;
+						{actualData?.results
+							.slice(
+								0,
+								isTopRank ? 10 : actualData.results.length
+							)
+							.map((item: MovieResponse, index: number) => {
+								const { id, backdrop_path } = item;
+								const title =
+									item.original_name ?? item.original_title;
 
-							return (
-								<div key={id}>
-									<MovieCard
-										id={id}
-										type={type}
-										title={title}
-										backdrop_path={backdrop_path}
-									/>
-								</div>
-							);
-						})}
+								return (
+									<div key={id}>
+										<MovieCard
+											id={id}
+											type={type}
+											isTopRank={isTopRank}
+											rankIndex={index}
+											title={title}
+											backdrop_path={backdrop_path}
+										/>
+									</div>
+								);
+							})}
 					</div>
 					<button
 						onClick={scrollLeft}

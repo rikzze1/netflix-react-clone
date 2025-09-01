@@ -1,7 +1,7 @@
 export interface IconProps {
-	color: string;
-	width: string;
-	height: string;
+	color?: string;
+	width?: string;
+	height?: string;
 }
 
 export interface MovieResponse {

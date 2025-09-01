@@ -77,6 +77,11 @@
 		&:hover {
 			transform: scale(1.05);
 		}
+
+		&--top-rank {
+			height: u.rem(240);
+			min-width: u.rem(150);
+		}
 	}
 	&__logo {
 		position: absolute;
@@ -106,6 +111,11 @@
 			text-shadow: u.rem(1) u.rem(1) u.rem(2) g.$clr-red;
 			z-index: 90;
 		}
+
+		&--top-rank {
+			width: u.rem(100);
+			height: u.rem(120);
+		}
 	}
 }
 
@@ -113,4 +123,12 @@
 .card__list,
 .card__poster {
 	z-index: 60;
+}
+
+.rank {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	gap: u.rem(4);
 }
