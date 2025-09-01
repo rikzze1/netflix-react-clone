@@ -10,7 +10,6 @@
 	gap: 0.5rem;
 	padding: u.rem(2);
 	overflow-y: hidden;
-	min-height: u.rem(200);
 
 	&__title {
 		font-weight: 700;
@@ -65,8 +64,8 @@
 
 		&--left-caret-toprank,
 		&--right-caret-toprank {
-			height: u.rem(220); // Match the taller poster height
-			top: u.rem(65); // Adjust vertical position for taller cards
+			height: u.rem(250);
+			top: u.rem(40);
 		}
 	}
 
@@ -88,7 +87,18 @@
 			height: u.rem(240);
 			min-width: u.rem(150);
 		}
+
+		@include u.breakpoint-down(medium) {
+			min-width: u.rem(200);
+			height: u.rem(120);
+		}
+
+		@include u.breakpoint-down(small) {
+			min-width: u.rem(180);
+			height: u.rem(90);
+		}
 	}
+
 	&__logo {
 		position: absolute;
 		opacity: 0;
@@ -116,11 +126,29 @@
 			font-weight: 700;
 			text-shadow: u.rem(1) u.rem(1) u.rem(2) g.$clr-red;
 			z-index: 90;
+
+			@include u.breakpoint-down(medium) {
+				font-size: u.rem(15);
+			}
+
+			@include u.breakpoint-down(small) {
+				font-size: u.rem(9);
+			}
 		}
 
 		&--top-rank {
 			width: u.rem(100);
 			height: u.rem(120);
+		}
+
+		@include u.breakpoint-down(medium) {
+			width: u.rem(100);
+			height: u.rem(80);
+		}
+
+		@include u.breakpoint-down(small) {
+			width: u.rem(70);
+			height: u.rem(50);
 		}
 	}
 }
