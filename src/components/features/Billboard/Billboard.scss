@@ -4,8 +4,9 @@
 .billboard {
 	background: var(--billboard-backdrop) center/cover no-repeat;
 	background-color: g.$clr-black;
-	height: 100vh;
-	min-height: 100vh;
+	height: 85vh;
+	min-height: 60vh;
+	max-height: 900px;
 	position: relative;
 
 	&::after {
@@ -99,7 +100,7 @@
 	}
 
 	&__fallback--title {
-		color: g.$clr-white;
+		color: white;
 		text-shadow: 1px 1px 1px red;
 		font-size: u.rem(60);
 		transform: scale(0.7) translateX(u.rem(-100)) translateY(180px);
@@ -181,8 +182,13 @@
 
 				@include u.breakpoint-down(small) {
 					font-size: u.rem(12);
-					padding: 0.3rem;
+					padding: 0;
 					gap: 0.3rem;
+					max-height: u.rem(40);
+
+					svg {
+						height: u.rem(15);
+					}
 				}
 
 				&:hover {

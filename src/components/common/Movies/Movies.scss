@@ -51,6 +51,11 @@
 				cursor: pointer;
 				background-color: rgba(g.$clr-black, 50%);
 			}
+
+			@include u.breakpoint-down(small) {
+				height: u.rem(94);
+				top: u.rem(30);
+			}
 		}
 
 		&--left-caret {

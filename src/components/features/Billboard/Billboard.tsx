@@ -4,6 +4,7 @@ import type { MovieResponse, TmdbImage } from '@/types/types';
 import { getTmdbImageUrl } from '@/util/getTmdbImageUrl';
 import { getYoutubeEmbedUrl } from '@/util/getYoutubeEmbedUrl';
 import { useMovieInfoStore } from '@/stores/header.store';
+import { TMDB_MOVIE_GENRE } from '@/services/tmdb/constants';
 
 import { useContent } from '@/services/tmdb/queries/content.query';
 import { useLogo } from '@/services/tmdb/queries/logo.query';
@@ -16,7 +17,6 @@ import { NotMutedIcon } from '@/components/common/Icons/NotMutedIcon';
 import { MutedIcon } from '@/components/common/Icons/MutedIcon';
 
 import './Billboard.scss';
-import { TMDB_MOVIE_GENRE } from '@/services/tmdb/constants';
 
 const MOVIE_BILLBOARD_INDEX = 5;
 const SEC_TO_END_VID = 30000;

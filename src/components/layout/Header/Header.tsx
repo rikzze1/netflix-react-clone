@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
+import clsx from 'clsx';
 import { useNavigate } from 'react-router';
-import { useMovieInfoStore } from '@/stores/header.store';
 
 import netflixLogo from '@/assets/logo/Netflix_Logo_RGB.png';
 import userProfile from '@/assets/profile/user.png';
@@ -10,6 +10,8 @@ import userProfileKids from '@/assets/profile/kids_profile.png';
 
 import { usePointerEvent } from '@/hooks/events/usePointerEvent';
 import { useClickEvent } from '@/hooks/events/useClickEvent';
+import { useScrollBackground } from '@/hooks/useScrollBackground';
+import { useMovieInfoStore } from '@/stores/header.store';
 
 import { SearchIcon } from '@/components/common/Icons/SearchIcon';
 import { NotificationIcon } from '@/components/common/Icons/NotificationIcon';
@@ -41,6 +43,7 @@ export const Header = () => {
 	const [isHomeNavClick, setIsHomeNavClick] = useState(false);
 
 	const { trackTrailerState } = useMovieInfoStore();
+	const isScrolled = useScrollBackground(80);
 
 	const menu: Menu[] = [
 		{
@@ -162,7 +165,11 @@ export const Header = () => {
 
 	return (
 		<nav
-			className={`header ${trackTrailerState ? 'header--trailer-playing' : ''}`}
+			className={clsx(
+				'header',
+				trackTrailerState && 'header--trailer-playing',
+				isScrolled && 'header--scrolled'
+			)}
 		>
 			<div className='header__left-menu'>
 				<button className='header__logo' onClick={returnToLogin}>

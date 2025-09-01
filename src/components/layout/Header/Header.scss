@@ -18,6 +18,11 @@
 		background-color: g.$clr-black;
 	}
 
+	&.header--scrolled {
+		background-color: rgba(0, 0, 0, 0.9);
+		backdrop-filter: blur(u.rem(10));
+	}
+
 	&__logo {
 		background: none;
 		border: none;
