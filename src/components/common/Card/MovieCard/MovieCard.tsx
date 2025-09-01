@@ -48,7 +48,7 @@ export const MovieCard = ({
 					{
 						'--card-logo':
 							isIntersecting && movieLogoData?.logos[1]?.file_path
-								? `url(${getTmdbImageUrl(movieLogoData?.logos[1]?.file_path, 'SMALL')})`
+								? `url(${getTmdbImageUrl(movieLogoData?.logos[1]?.file_path, 'MEDIUM')})`
 								: '',
 					} as CSSProperties
 				}
