@@ -52,6 +52,11 @@
 				background-color: rgba(g.$clr-black, 50%);
 			}
 
+			@include u.breakpoint-down(medium) {
+				height: u.rem(190);
+				top: u.rem(20);
+			}
+
 			@include u.breakpoint-down(small) {
 				height: u.rem(94);
 				top: u.rem(30);

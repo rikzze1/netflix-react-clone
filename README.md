@@ -9,7 +9,6 @@ A modern Netflix clone built with React and TypeScript.
 
 📺 [Watch Demo Video](https://www.youtube.com/watch?v=N_vROtuFc3E)
 
-
 ## Tech Stack
 
 - **TMDB API** - Movie/TV data
@@ -38,11 +37,13 @@ UI design and assets from [Netflix Clone Figma Community](https://www.figma.com/
 ## Setup
 
 1. Clone and install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Create `.env` file:
+
 ```bash
 VITE_TMDB_URL=https://api.themoviedb.org
 VITE_TMDB_API_KEY=your_tmdb_api_key
@@ -50,6 +51,7 @@ VITE_TMDB_API_ACCESS_TOKEN=your_tmdb_access_token
 ```
 
 3. Start development:
+
 ```bash
 npm run dev
 ```
