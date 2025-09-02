@@ -45,6 +45,7 @@ npm install
 2. Create `.env` file:
 ```bash
 VITE_TMDB_URL=https://api.themoviedb.org
+VITE_TMDB_API_KEY=your_tmdb_api_key
 VITE_TMDB_API_ACCESS_TOKEN=your_tmdb_access_token
 ```
 
