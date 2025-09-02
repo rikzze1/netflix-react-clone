@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import type { MouseEvent} from 'react';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router';
 
@@ -117,7 +118,7 @@ export const Header = () => {
 	];
 
 	const returnToLogin = () => navigate('/browse');
-	const searchToggle = (e?: React.MouseEvent) => {
+	const searchToggle = (e?: MouseEvent) => {
 		e?.stopPropagation();
 		setIsSearchClick(!isSearchClick);
 	};

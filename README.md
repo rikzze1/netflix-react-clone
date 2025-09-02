@@ -1,69 +1,47 @@
-# React + TypeScript + Vite
+# Netflix Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern Netflix clone built with React and TypeScript.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **React** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool
+- **TanStack Query** - Data fetching
+- **Zustand** - State management
+- **React Router** - Navigation
+- **Sass** - Styling
+- **Axios** - HTTP client
+- **TMDB API** - Movie/TV data
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## API Endpoints
 
-```js
-export default tseslint.config([
-	globalIgnores(['dist']),
-	{
-		files: ['**/*.{ts,tsx}'],
-		extends: [
-			// Other configs...
+The app uses The Movie Database (TMDB) API v3:
 
-			// Remove tseslint.configs.recommended and replace with this
-			...tseslint.configs.recommendedTypeChecked,
-			// Alternatively, use this for stricter rules
-			...tseslint.configs.strictTypeChecked,
-			// Optionally, add this for stylistic rules
-			...tseslint.configs.stylisticTypeChecked,
+- `/3/discover/movie` - Discover movies by genre/year
+- `/3/discover/tv` - Discover TV shows by genre/year
+- `/3/movie/{id}/videos` - Get movie trailers
+- `https://image.tmdb.org/t/p/` - Movie poster/backdrop images
 
-			// Other configs...
-		],
-		languageOptions: {
-			parserOptions: {
-				project: ['./tsconfig.node.json', './tsconfig.app.json'],
-				tsconfigRootDir: import.meta.dirname,
-			},
-			// other options...
-		},
-	},
-]);
+## Design Assets
+
+UI design and assets from [Netflix Clone Figma Community](https://www.figma.com/community/file/967543658879972914)
+
+## Quick Start
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Lint code
+- `npm run format` - Format code
 
-export default tseslint.config([
-	globalIgnores(['dist']),
-	{
-		files: ['**/*.{ts,tsx}'],
-		extends: [
-			// Other configs...
-			// Enable lint rules for React
-			reactX.configs['recommended-typescript'],
-			// Enable lint rules for React DOM
-			reactDom.configs.recommended,
-		],
-		languageOptions: {
-			parserOptions: {
-				project: ['./tsconfig.node.json', './tsconfig.app.json'],
-				tsconfigRootDir: import.meta.dirname,
-			},
-			// other options...
-		},
-	},
-]);
-```
+
+⚠️ **Work in Progress** - Login functionality and additional features to be continued.
