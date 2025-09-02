@@ -9,7 +9,7 @@ A modern Netflix clone built with React and TypeScript.
 
 📺 [Watch Demo Video](https://www.youtube.com/watch?v=N_vROtuFc3E)
 
-## Tech Stack
+## Tools
 
 - **TMDB API** - Movie/TV data
 - **React** - UI library
