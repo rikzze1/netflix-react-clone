@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ComponentType } from 'react';
 import clsx from 'clsx';
 import { useIntersectionObserver } from 'usehooks-ts';
 
@@ -8,7 +8,7 @@ import { getTmdbImageUrl } from '@/util/getTmdbImageUrl';
 import { RANKS_ICON } from '@/util/getRankIcon';
 
 interface TopRankProps {
-	RankComponent: React.ComponentType;
+	RankComponent: ComponentType;
 	intersectionRef: (node?: Element | null) => void;
 	hasBackdropAndIntersected: boolean | string;
 	backdrop_path: string;
