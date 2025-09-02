@@ -1,6 +1,18 @@
 # Netflix Clone
 
 A modern Netflix clone built with React and TypeScript.
+🚧 **WIP**
+
+![App Preview](public/preview.webp)
+
+## Demo
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=N_vROtuFc3E">
+    <img src="https://img.youtube.com/vi/N_vROtuFc3E/maxresdefault.jpg" alt="Netflix Clone Demo" style="width:100%;max-width:600px;">
+  </a>
+  <p><strong>▶️ Click to watch demo</strong></p>
+</div>
 
 
 ## Tech Stack
@@ -42,6 +54,3 @@ npm run dev
 - `npm run preview` - Preview production build
 - `npm run lint` - Lint code
 - `npm run format` - Format code
-
-
-⚠️ **Work in Progress** - Login functionality and additional features to be continued.
