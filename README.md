@@ -35,9 +35,22 @@ The app uses The Movie Database (TMDB) API v3:
 
 UI design and assets from [Netflix Clone Figma Community](https://www.figma.com/community/file/967543658879972914)
 
-## Quick Start
+## Setup
 
+1. Clone and install dependencies:
 ```bash
 npm install
+```
+
+2. Create `.env` file:
+```bash
+VITE_TMDB_URL=https://api.themoviedb.org
+VITE_TMDB_API_ACCESS_TOKEN=your_tmdb_access_token
+```
+
+3. Start development:
+```bash
 npm run dev
 ```
+
+Get your TMDB API key from [The Movie Database](https://www.themoviedb.org/settings/api)
