@@ -41,11 +41,3 @@ UI design and assets from [Netflix Clone Figma Community](https://www.figma.com/
 npm install
 npm run dev
 ```
-
-## Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Lint code
-- `npm run format` - Format code
