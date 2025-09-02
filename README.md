@@ -7,12 +7,7 @@ A modern Netflix clone built with React and TypeScript.
 
 ## Demo
 
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=N_vROtuFc3E">
-    <img src="https://img.youtube.com/vi/N_vROtuFc3E/maxresdefault.jpg" alt="Netflix Clone Demo" style="width:100%;max-width:600px;">
-  </a>
-  <p><strong>▶️ Click to watch demo</strong></p>
-</div>
+📺 [Watch Demo Video](https://www.youtube.com/watch?v=N_vROtuFc3E)
 
 
 ## Tech Stack
