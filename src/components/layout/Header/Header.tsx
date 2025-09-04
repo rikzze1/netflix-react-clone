@@ -153,15 +153,15 @@ export const Header = () => {
 	usePointerEvent({
 		element: profileRef,
 		relatedTarget: '.item__settings',
-		onMouseEnter: handleProfileMouseEnter,
-		onMouseLeave: handleProfileMouseLeave,
+		onPointerEnter: handleProfileMouseEnter,
+		onPointerLeave: handleProfileMouseLeave,
 	});
 
 	usePointerEvent({
 		element: homeRef,
 		relatedTarget: '.header__nav-mobile ul',
-		onMouseEnter: handleHomeMouseEnter,
-		onMouseLeave: handleHomeMouseLeave,
+		onPointerEnter: handleHomeMouseEnter,
+		onPointerLeave: handleHomeMouseLeave,
 	});
 
 	return (

@@ -1,50 +1,65 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import type { RefObject } from 'react';
 
-interface EventMouseLeave {
+interface EventPointerLeave {
 	element: RefObject<HTMLDivElement | null>;
 	relatedTarget?: string;
-	onMouseEnter: () => void;
-	onMouseLeave: () => void;
+	onPointerEnter: () => void;
+	onPointerLeave: () => void;
+	delay?: number;
 }
 
 export const usePointerEvent = ({
 	element,
 	relatedTarget,
-	onMouseEnter,
-	onMouseLeave,
-}: EventMouseLeave) => {
+	onPointerEnter,
+	onPointerLeave,
+	delay = 300,
+}: EventPointerLeave) => {
+	const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
+		undefined
+	);
+
 	useEffect(() => {
 		const targetElement = element?.current;
 
-		const handleMouseEnter = () => {
-			onMouseEnter();
+		const handlePointerEnter = () => {
+			if (timeoutRef.current) {
+				clearTimeout(timeoutRef.current);
+			}
+			onPointerEnter();
 		};
 
-		const handleMouseLeave = (e: MouseEvent) => {
+		const handlePointerLeave = (e: PointerEvent) => {
 			if (relatedTarget) {
 				const container = targetElement?.querySelector(relatedTarget);
 				if (container?.contains(e.relatedTarget as Node)) return;
 			}
-			onMouseLeave();
+
+			timeoutRef.current = setTimeout(() => {
+				onPointerLeave();
+			}, delay);
 		};
 
 		if (targetElement) {
-			targetElement.addEventListener('mouseenter', handleMouseEnter);
-			targetElement.addEventListener('mouseleave', handleMouseLeave);
+			targetElement.addEventListener('pointerenter', handlePointerEnter);
+			targetElement.addEventListener('pointerleave', handlePointerLeave);
 		}
 
 		return () => {
+			if (timeoutRef.current) {
+				clearTimeout(timeoutRef.current);
+			}
 			if (targetElement) {
 				targetElement.removeEventListener(
-					'mouseenter',
-					handleMouseEnter
+					'pointerenter',
+					handlePointerEnter
 				);
 				targetElement.removeEventListener(
-					'mouseenter',
-					handleMouseLeave
+					'pointerleave',
+					handlePointerLeave
 				);
 			}
 		};
-	}, [element, onMouseEnter, onMouseLeave, relatedTarget]);
+	}, [element, onPointerEnter, onPointerLeave, relatedTarget, delay]);
 };
