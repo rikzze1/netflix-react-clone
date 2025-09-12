@@ -11,7 +11,7 @@ import userProfileKids from '@/assets/profile/kids_profile.png';
 
 import { usePointerEvent } from '@/hooks/events/usePointerEvent';
 import { useClickEvent } from '@/hooks/events/useClickEvent';
-import { useScrollBackground } from '@/hooks/useScrollBackground';
+import { useScrollBackground } from '@/hooks/events/useScrollBackground';
 import { useMovieInfoStore } from '@/stores/header.store';
 
 import { SearchIcon } from '@/components/common/Icons/SearchIcon';
