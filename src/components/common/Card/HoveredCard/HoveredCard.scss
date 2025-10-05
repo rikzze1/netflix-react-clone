@@ -65,6 +65,18 @@
 		}
 	}
 
+	&__add,
+	&__like,
+	&__more {
+		background: rgba(32, 32, 32, 0.9);
+		border: 2px solid rgba(g.$clr-white, 0.5);
+
+		&:hover {
+			background: rgba(32, 32, 32, 1);
+			border-color: g.$clr-white;
+		}
+	}
+
 	&__play {
 		background: g.$clr-white;
 		font-size: u.rem(14);

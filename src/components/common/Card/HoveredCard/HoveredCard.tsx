@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import "./HoveredCard.scss";
 import { getTmdbImageUrl } from "@/util/getTmdbImageUrl";
 import { PlayIcon } from "../../Icons/PlayIcon";
+import { AddIcon } from "../../Icons/AddIcon";
+import { ThumbsUpIcon } from "../../Icons/ThumbsUpIcon";
+import { DownArrowIcon } from "../../Icons/DownArrowIcon";
 
 interface HoveredCardProps {
     backdrop_path?: string;
@@ -37,9 +40,15 @@ export const HoveredCard = ({ backdrop_path, title, position }: HoveredCardProps
                     <button className="hover-card__play">
                         <PlayIcon color='black' width='25' height='25' />
                     </button>
-                    <button className="hover-card__add">+</button>
-                    <button className="hover-card__like">👍</button>
-                    <button className="hover-card__more">▼</button>
+                    <button className="hover-card__add">
+                        <AddIcon color='white' width='55' height='55' />
+                    </button>
+                    <button className="hover-card__like">
+                        <ThumbsUpIcon color='white' width='25' height='25' />
+                    </button>
+                    <button className="hover-card__more">
+                        <DownArrowIcon color='white' width='20' height='20' />
+                    </button>
                 </div>
                 <div className="hover-card__info">
                     <div className="hover-card__metadata">
