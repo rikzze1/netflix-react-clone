@@ -11,6 +11,8 @@
 	}
 
 	@include u.breakpoint-down(small) {
-		gap: u.rem(-10);
+		gap: u.rem(30);
+		width: 100%;
+		overflow-x: visible;
 	}
 }

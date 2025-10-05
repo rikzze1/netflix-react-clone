@@ -9,6 +9,7 @@
 		'main'
 		'footer';
 	min-height: 100vh;
+	overflow: hidden;
 
 	&__header {
 		grid-area: header;
@@ -29,19 +30,31 @@
 		.main__movies {
 			position: relative;
 			margin-top: u.rem(-200);
+			margin-left: u.rem(70);
 			color: g.$clr-white;
 			z-index: 20;
 
 			@include u.breakpoint-down(medium) {
+				padding-top: u.rem(150);
 				padding-left: u.rem(10);
 				padding-right: u.rem(10);
 				margin-top: u.rem(-150);
-				padding-top: u.rem(150);
+				margin-left: u.rem(10);
 			}
 
 			@include u.breakpoint-down(small) {
-				margin-top: u.rem(-100);
+				position: absolute;
+				top: u.rem(300);
 				padding-top: u.rem(100);
+				margin-top: u.rem(-100);
+				margin-left: 0;
+				padding-left: u.rem(10);
+				padding-right: u.rem(10);
+				height: calc(100vh - 300px);
+				width: 100%;
+				overflow-y: auto;
+				overflow-x: visible;
+				z-index: 60;
 			}
 		}
 	}

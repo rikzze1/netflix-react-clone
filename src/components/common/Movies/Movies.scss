@@ -11,6 +11,12 @@
 	padding: u.rem(2);
 	overflow-y: hidden;
 
+	@include u.breakpoint-down(small) {
+		padding: u.rem(2) 0;
+		margin: 0 u.rem(10);
+		overflow: visible;
+	}
+
 	&__title {
 		font-weight: 700;
 		font-size: u.rem(26);
@@ -32,6 +38,7 @@
 		padding: 2px;
 		overflow-x: hidden;
 		border-radius: u.rem(10);
+
 
 		&--left-caret,
 		&--right-caret {
