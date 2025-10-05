@@ -1,0 +1,119 @@
+@use '@/scss/globals' as g;
+@use '@/scss/util' as u;
+@use 'sass:math';
+
+.hover-card {
+	position: fixed;
+	width: u.rem(420);
+	height: u.rem(320);
+	background: g.$clr-black;
+	border-radius: u.rem(8);
+	box-shadow: 0 u.rem(12) u.rem(32) rgba(g.$clr-black, 0.9);
+	z-index: 9999;
+	overflow: hidden;
+	pointer-events: none;
+
+	transform: scale(0.8);
+	opacity: 0;
+	transition: all 0.3s ease-in-out 0.3s;
+
+	&.visible {
+		transform: scale(1);
+		opacity: 1;
+	}
+
+	&__image {
+		width: 100%;
+		height: 55%;
+		background: var(--card-backdrop) center/cover no-repeat g.$clr-black;
+	}
+
+	&__content {
+		padding: u.rem(16);
+		height: 45%;
+		display: flex;
+		flex-direction: column;
+		gap: u.rem(10);
+		justify-content: space-between;
+	}
+
+	&__actions {
+		display: flex;
+		gap: u.rem(6);
+		align-items: center;
+	}
+
+	&__play,
+	&__add,
+	&__like,
+	&__more {
+		width: u.rem(32);
+		height: u.rem(32);
+		border-radius: 50%;
+		border: none;
+		background: g.$clr-white;
+		color: g.$clr-black;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: u.rem(12);
+		font-weight: bold;
+
+		&:hover {
+			background: rgba(g.$clr-white, 0.8);
+		}
+	}
+
+	&__play {
+		background: g.$clr-white;
+		font-size: u.rem(14);
+	}
+
+	&__more {
+		margin-left: auto;
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		gap: u.rem(6);
+	}
+
+	&__metadata {
+		display: flex;
+		align-items: center;
+		gap: u.rem(8);
+		font-size: u.rem(10);
+		color: rgba(g.$clr-white, 0.8);
+	}
+
+	&__rating {
+		color: g.$clr-white;
+		font-size: u.rem(10);
+		font-weight: bold;
+		border: 1px solid g.$clr-white;
+		padding: u.rem(1) u.rem(3);
+		border-radius: u.rem(2);
+		width: fit-content;
+	}
+
+	&__year,
+	&__duration,
+	&__quality {
+		color: rgba(g.$clr-white, 0.8);
+		font-size: u.rem(10);
+	}
+
+	&__title {
+		color: g.$clr-white;
+		font-size: u.rem(16);
+		font-weight: bold;
+		line-height: 1.2;
+	}
+
+	&__genres {
+		color: rgba(g.$clr-white, 0.7);
+		font-size: u.rem(12);
+	}
+}
