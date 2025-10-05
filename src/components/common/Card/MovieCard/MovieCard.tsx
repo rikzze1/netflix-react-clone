@@ -139,7 +139,10 @@ export const MovieCard = ({
 	const handleCardHoverLeave = () => {
 		if (isCardHovered) {
 			setIsCardHovered(false);
-			setShowHoverCard(false);
+			// Add delay to allow smooth exit animation
+			setTimeout(() => {
+				setShowHoverCard(false);
+			}, 300); // Match the CSS transition duration
 		}
 	};
 
@@ -188,7 +191,7 @@ export const MovieCard = ({
 								'--card-backdrop': hasBackdropAndIntersected
 									? `url(${getTmdbImageUrl(backdrop_path, 'ORIGINAL')})`
 									: '',
-								opacity: 1
+								opacity: isCardHovered ? 0.3 : 1
 							} as CSSProperties
 						}
 					>
@@ -212,7 +215,7 @@ export const MovieCard = ({
 							)}
 						</div>
 					</div>
-					{showHoverCard && <HoveredCard backdrop_path={backdrop_path} title={title} position={hoverPosition} />}
+					{showHoverCard && <HoveredCard backdrop_path={backdrop_path} title={title} position={hoverPosition} isCardHovered={isCardHovered} />}
 				</>
 			) : (
 				<TopRank

@@ -12,9 +12,10 @@ interface HoveredCardProps {
     backdrop_path?: string;
     title?: string;
     position: { x: number; y: number };
+    isCardHovered?: boolean;
 }
 
-export const HoveredCard = ({ backdrop_path, title, position }: HoveredCardProps) => {
+export const HoveredCard = ({ backdrop_path, title, position, isCardHovered }: HoveredCardProps) => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -22,6 +23,13 @@ export const HoveredCard = ({ backdrop_path, title, position }: HoveredCardProps
         const timer = setTimeout(() => setIsVisible(true), 50);
         return () => clearTimeout(timer);
     }, []);
+
+    useEffect(() => {
+        // Handle exit animation when hover ends
+        if (isCardHovered === false) {
+            setIsVisible(false);
+        }
+    }, [isCardHovered]);
 
     const card = (
         <div
