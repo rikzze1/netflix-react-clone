@@ -146,7 +146,7 @@ export const Billboard = () => {
 
 	const { data: movieData, isSuccess: isFetchMovieSuccess } = useContent({
 		type: 'movie',
-		genres: [TMDB_MOVIE_GENRE.SCIENCE_FICTION, TMDB_MOVIE_GENRE.DRAMA],
+		genres: [TMDB_MOVIE_GENRE.SCIENCE_FICTION],
 	});
 
 	const { id, title, backdrop_path, overview }: MovieResponse =
