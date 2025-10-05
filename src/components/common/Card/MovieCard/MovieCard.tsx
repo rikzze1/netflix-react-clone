@@ -112,7 +112,6 @@ export const MovieCard = ({
 
 	const handleCardHoverEnter = () => {
 		if (!isCardHovered) {
-			// Hide all other hover cards
 			window.dispatchEvent(new CustomEvent('hideAllHoverCards', { detail: { excludeId: id } }));
 
 			const rect = movieCardRef.current?.getBoundingClientRect();
@@ -126,23 +125,15 @@ export const MovieCard = ({
 			setIsCardHovered(true);
 			setShowHoverCard(true);
 
-			// Hide original card after hover card animation completes
-			setTimeout(() => {
-				// Only hide if still hovering
-				if (isCardHovered) {
-					// setOriginalCardVisible(false);
-				}
-			}, 800); // 0.5s delay + 0.3s transition
 		}
 	};
 
 	const handleCardHoverLeave = () => {
 		if (isCardHovered) {
 			setIsCardHovered(false);
-			// Add delay to allow smooth exit animation
 			setTimeout(() => {
 				setShowHoverCard(false);
-			}, 300); // Match the CSS transition duration
+			}, 300);
 		}
 	};
 
@@ -174,7 +165,7 @@ export const MovieCard = ({
 			window.removeEventListener('scroll', handleScroll, true);
 			window.removeEventListener('hideAllHoverCards', handleHideAllHoverCards as EventListener);
 		};
-	}, [isCardHovered, id]);
+	}, [isCardHovered, id, showHoverCard]);
 
 	return (
 		<>
