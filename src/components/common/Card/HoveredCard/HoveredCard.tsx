@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { useState, useEffect } from "react";
 import "./HoveredCard.scss";
 import { getTmdbImageUrl } from "@/util/getTmdbImageUrl";
+import { PlayIcon } from "../../Icons/PlayIcon";
 
 interface HoveredCardProps {
     backdrop_path?: string;
@@ -33,7 +34,9 @@ export const HoveredCard = ({ backdrop_path, title, position }: HoveredCardProps
             <div className="hover-card__image"></div>
             <div className="hover-card__content">
                 <div className="hover-card__actions">
-                    <button className="hover-card__play">▶</button>
+                    <button className="hover-card__play">
+                        <PlayIcon color='black' width='25' height='25' />
+                    </button>
                     <button className="hover-card__add">+</button>
                     <button className="hover-card__like">👍</button>
                     <button className="hover-card__more">▼</button>
